@@ -1,69 +1,60 @@
 package com.sujian.lines.ui.guide;
 
-import android.graphics.Color;
-import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
+import android.content.Intent;
+import android.support.v4.view.ViewPager;
 
-import com.github.paolorotolo.appintro.AppIntro;
-import com.github.paolorotolo.appintro.AppIntroFragment;
+import com.flyco.banner.anim.select.ZoomInEnter;
 import com.sujian.lines.R;
+import com.sujian.lines.base.BaseActivity;
+import com.sujian.lines.base.util.StatusBarUtil;
+import com.sujian.lines.ui.login.LoginActivity;
+import com.sujian.lines.ui.register.RegisterActivity;
+import com.sujian.lines.view.layout.SimpleGuideBanner;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import butterknife.Bind;
 
 /**
  * Created by sujian on 2016/9/5.
  * Mail:121116111@qq.com
  */
-public class GuideActivity extends AppIntro {
+public class GuideActivity extends BaseActivity {
+
+    @Bind(R.id.sgb_guide)
+    SimpleGuideBanner sgb_guide;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-        // Add your slide's fragments here.
-        // AppIntro will automatically generate the dots indicator and buttons.
-//        addSlide(first_fragment);
-//        addSlide(second_fragment);
-//        addSlide(third_fragment);
-//        addSlide(fourth_fragment);
-
-        // Instead of fragments, you can also use our default slide
-        // Just set a title, description, background and image. AppIntro will do the rest.
-        addSlide(AppIntroFragment.newInstance("1", "1", R.mipmap.app_icon, R.color.buleTextColor));
-        addSlide(AppIntroFragment.newInstance("2", "1", R.mipmap.app_icon, R.color.buleTextColor));
-        addSlide(AppIntroFragment.newInstance("3", "1", R.mipmap.app_icon, R.color.buleTextColor));
-        addSlide(AppIntroFragment.newInstance("4", "1", R.mipmap.app_icon, R.color.buleTextColor));
-
-
-        // OPTIONAL METHODS
-        // Override bar/separator color.
-        setBarColor(Color.parseColor("#3F51B5"));
-        setSeparatorColor(Color.parseColor("#2196F3"));
-
-        // Hide Skip/Done button.
-        showSkipButton(false);
-        setProgressButtonEnabled(false);
-
-        // Turn vibration on and set intensity.
-        // NOTE: you will probably need to ask VIBRATE permisssion in Manifest.
-        setVibrate(true);
-        setVibrateIntensity(30);
+    public int getLayoutId() {
+        return R.layout.activity_guide;
     }
 
     @Override
-    public void onSkipPressed(Fragment currentFragment) {
-        super.onSkipPressed(currentFragment);
-        // Do something when users tap on Skip button.
-    }
+    public void initView() {
 
-    @Override
-    public void onDonePressed(Fragment currentFragment) {
-        super.onDonePressed(currentFragment);
-        // Do something when users tap on Done button.
-    }
 
-    @Override
-    public void onSlideChanged(@Nullable Fragment oldFragment, @Nullable Fragment newFragment) {
-        super.onSlideChanged(oldFragment, newFragment);
-        // Do something when the slide changes.
+
+    List<Integer> guideList=new ArrayList<>();
+        guideList.add(R.mipmap.guide_01);
+        guideList.add(R.mipmap.guide_02);
+        guideList.add(R.mipmap.guide_03);
+
+        sgb_guide
+                .setIndicatorWidth(6)
+                .setIndicatorHeight(6)
+                .setIndicatorGap(12)
+                .setIndicatorCornerRadius(3.5f)
+                .setSelectAnimClass(ZoomInEnter.class)
+                .barPadding(0, 10, 0, 10)
+                .setSource(guideList)
+                .startScroll();
+
+        sgb_guide.setOnJumpClickL(new SimpleGuideBanner.OnJumpClickL() {
+            @Override
+            public void onJumpClick() {
+                startActivity(new Intent(mContext, LoginActivity.class));
+            }
+        });
     }
 }

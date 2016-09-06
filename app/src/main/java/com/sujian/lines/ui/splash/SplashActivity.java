@@ -24,6 +24,7 @@ public class SplashActivity extends BaseActivity {
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
             startActivity(new Intent(mContext, GuideActivity.class));
+            finish();
         }
     };
 
@@ -37,6 +38,6 @@ public class SplashActivity extends BaseActivity {
         htv_splash.setAnimateType(HTextViewType.LINE);
         htv_splash.animateText("L i n e s"); // animate
         handler.sendEmptyMessageDelayed(1,3000);
-        finish();
+
     }
 }

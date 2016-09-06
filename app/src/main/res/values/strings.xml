@@ -1,3 +1,13 @@
 <resources>
     <string name="app_name">Lines</string>
+    <string name="drawer_open">drawer_open</string>
+    <string name="drawer_close">drawer_close</string>
+    <string name="login">Lines-Login</string>
+    <string name="Username">Username</string>
+    <string name="Password">Userpassword</string>
+    <string name="go">Go</string>
+    <string name="forgot_your_password">forgot your password</string>
+    <string name="register">Lines-Register</string>
+    <string name="repeat_password">Repeatpassword</string>
+    <string name="next">Next</string>
 </resources>

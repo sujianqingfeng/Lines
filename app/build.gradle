@@ -41,6 +41,10 @@ dependencies {
     compile 'com.jakewharton:butterknife:7.0.1'
 
     compile 'hanks.xyz:htextview-library:0.1.5'
-    compile 'com.github.paolorotolo:appintro:4.0.0'
+
+    compile 'com.nineoldandroids:library:2.4.0'
+    compile 'com.flyco.banner:FlycoBanner_Lib:2.0.2@aar'
+
+    compile 'com.mobsandgeeks:android-saripaar:2.0.0'
 
 }

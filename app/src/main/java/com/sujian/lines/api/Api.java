@@ -29,7 +29,9 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class Api {
 
 
-    public static final String BASE_URL = "http://www.xheiwu.cn/";
+    public static final String BASE_URL = "https://leancloud.cn:443/1.1/";
+    public static final String X_LC_Id = "t6AeDTpmn32eDWInYGbafqoi-gzGzoHsz";
+    public static final String X_LC_Key = "eKOuGRhDME8tx4QiCjDyN1tM";
 
     public static final int DEFAULT_TIMEOUT = 5;
 
@@ -37,10 +39,9 @@ public class Api {
     public ApiService service;
 
     Interceptor mInterceptor = (chain) -> chain.proceed(chain.request().newBuilder()
-            .addHeader("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8")
-            .addHeader("Cookie","re_url=http://www.xheiwu.cn/")
-            .addHeader("Cookie","up_time="+System.currentTimeMillis())
-            .addHeader("User-Agent","Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/38.0.2125.122 Safari/537.36 SE 2.X MetaSr 1.0")
+            .addHeader("X-LC-Id", X_LC_Id)
+            .addHeader("X-LC-Key", X_LC_Key)
+            .addHeader("Content-Type", "application/json")
             .build());
 
     //构造方法私有

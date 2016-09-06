@@ -3,7 +3,7 @@ package com.sujian.lines.base;
 import java.io.Serializable;
 
 /**
- * Created by baixiaokang on 16/4/26.
+ * 实体的基类
  */
 public interface BaseEntity {
     class BaseBean implements Serializable {

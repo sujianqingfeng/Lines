@@ -3,19 +3,18 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:fitsSystemWindows="true"
     android:layout_height="match_parent"
     android:background="@android:color/white"
     android:gravity="center"
     tools:context=".ui.splash.SplashActivity">
 
-    <com.hanks.htextview.HTextView
-        android:id="@+id/htv_splash"
+    <com.sujian.lines.view.layout.SimpleGuideBanner
+        android:id="@+id/sgb_guide"
+        android:fitsSystemWindows="true"
         android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:background="@android:color/transparent"
-        android:gravity="center"
-        android:textColor="@color/buleTextColor"
-        android:textSize="30sp" />
-
+        android:layout_height="match_parent"
+        app:bb_barPaddingLeft="8dp"
+        app:bb_isLoopEnable="false"/>
 
 </LinearLayout>
