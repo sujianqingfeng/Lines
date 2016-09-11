@@ -22,6 +22,9 @@ Lines 贺聂双 毕业设计Android
 
 .......
 
+##关于我
+email：121116111@qq.com  or h121116111@gmail.com
+
 ##License
 Copyright 2016 sujian
 
