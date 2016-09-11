@@ -2,6 +2,7 @@ package com.sujian.lines.ui.login;
 
 import android.util.Log;
 
+import com.sujian.lines.base.util.SpUtil;
 import com.sujian.lines.data.entity._User;
 
 import rx.Subscriber;
@@ -29,6 +30,7 @@ public class LoginPresenter extends LoginContract.Presenter {
                     @Override
                     public void onNext(_User user) {
                         mView.loginSuccess();
+                        SpUtil.setUser(user);
                         mView.showMsg("登录成功");
                     }
                 }));

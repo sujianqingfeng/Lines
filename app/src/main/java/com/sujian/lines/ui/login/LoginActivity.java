@@ -21,6 +21,7 @@ import com.mobsandgeeks.saripaar.annotation.Order;
 import com.mobsandgeeks.saripaar.annotation.Password;
 import com.sujian.lines.R;
 import com.sujian.lines.base.BaseActivity;
+import com.sujian.lines.base.util.NetWorkUtil;
 import com.sujian.lines.base.util.ToastUtil;
 import com.sujian.lines.ui.home.HomeActivity;
 import com.sujian.lines.ui.register.RegisterActivity;
@@ -97,10 +98,15 @@ public class LoginActivity extends BaseActivity<LoginPresenter,LoginModel> imple
     //验证成功后就开始登录操作
     @Override
     public void onValidationSucceeded() {
-        String user=et_username.getText().toString().trim();
-        String password=et_password.getText().toString().trim();
-        Log.e("用户与密码",user+"---------"+password);
-        mPresenter.login(user,password);
+        if(NetWorkUtil.isNetConnected(mContext)){
+            String user=et_username.getText().toString().trim();
+            String password=et_password.getText().toString().trim();
+            Log.e("用户与密码",user+"---------"+password);
+            mPresenter.login(user,password);
+        }else {
+            showMsg("没有网络 骚年");
+        }
+
     }
     //验证失败提示
     @Override

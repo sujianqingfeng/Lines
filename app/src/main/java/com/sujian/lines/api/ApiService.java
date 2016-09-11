@@ -1,6 +1,11 @@
 package com.sujian.lines.api;
 
 import com.sujian.lines.data.CreatedResult;
+import com.sujian.lines.data.Data;
+import com.sujian.lines.data.entity.Comment;
+import com.sujian.lines.data.entity.CommentInfo;
+import com.sujian.lines.data.entity.Homeitem;
+import com.sujian.lines.data.entity.HomeitemInfo;
 import com.sujian.lines.data.entity._User;
 
 
@@ -19,4 +24,15 @@ public interface ApiService {
 
     @GET("login")
     Observable<_User> login(@Query("username") String username, @Query("password") String password);
+
+    @GET("109-35?maxResult=20&needContent=1&showapi_appid=24251&showapi_sign=14f6b2f44ca6481e89b2d8b6153a3c4a")
+    Observable<HomeitemInfo> getHomeItemInfo(@Query("channelName") String channelName, @Query("page") int page);
+
+    @POST("classes/Comment")
+    Observable<CreatedResult> createComment(@Body Comment mComment);
+
+    @GET("classes/Comment")
+    Observable<Data<CommentInfo>> getCommentList(@Query("include") String include, @Query("where") String where, @Query("skip") int skip, @Query("limit") int limit);
+
+
 }
