@@ -16,17 +16,14 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.splash.SplashActivity"></activity>
+        <activity android:name=".ui.splash.SplashActivity" />
         <activity
             android:name=".ui.guide.GuideActivity"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".ui.home.HomeActivity">
-
-        </activity>
+        <activity android:name=".ui.home.HomeActivity"></activity>
         <activity
             android:name=".ui.login.LoginActivity"
-            android:windowSoftInputMode="adjustResize" >
-
+            android:windowSoftInputMode="adjustResize">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -36,7 +33,21 @@
         <activity
             android:name=".ui.register.RegisterActivity"
             android:windowSoftInputMode="adjustResize" />
-        <activity android:name=".ui.news.NewDetailedActivity"></activity>
+        <activity android:name=".ui.news.NewDetailedActivity" />
+        <activity android:name=".ui.user.UserActivity"></activity>
+
+
+
+
+        <activity
+            android:name="cn.finalteam.rxgalleryfinal.ui.activity.MediaActivity"
+            android:screenOrientation="portrait"
+            android:exported="true"
+            />
+        <activity
+            android:name="com.yalantis.ucrop.UCropActivity"
+            android:screenOrientation="portrait"
+           />
     </application>
 
 </manifest>

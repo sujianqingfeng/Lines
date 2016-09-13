@@ -3,6 +3,7 @@ package com.sujian.lines.ui.home;
 import com.sujian.lines.base.BaseModel;
 import com.sujian.lines.base.BasePresenter;
 import com.sujian.lines.base.BaseView;
+import com.sujian.lines.data.entity._User;
 import com.sujian.lines.ui.register.RegisterContract;
 
 /**
@@ -16,9 +17,11 @@ public class HomeContract {
 
     interface View extends BaseView{
        void showTabs(String[] tabs);
+        void initUserInfo(_User user);
     }
 
     abstract static class Presenter extends BasePresenter<Model,View>{
         abstract void showTabs();
+        public abstract void getUserInfo();
     }
 }

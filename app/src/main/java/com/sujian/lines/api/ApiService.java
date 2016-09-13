@@ -7,11 +7,17 @@ import com.sujian.lines.data.entity.CommentInfo;
 import com.sujian.lines.data.entity.Homeitem;
 import com.sujian.lines.data.entity.HomeitemInfo;
 import com.sujian.lines.data.entity._User;
+import com.sujian.lines.ui.user.UserModel;
 
 
+import okhttp3.RequestBody;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
+import retrofit2.http.Header;
+import retrofit2.http.Headers;
 import retrofit2.http.POST;
+import retrofit2.http.PUT;
+import retrofit2.http.Path;
 import retrofit2.http.Query;
 import rx.Observable;
 
@@ -33,6 +39,14 @@ public interface ApiService {
 
     @GET("classes/Comment")
     Observable<Data<CommentInfo>> getCommentList(@Query("include") String include, @Query("where") String where, @Query("skip") int skip, @Query("limit") int limit);
+
+    @Headers("Content-Type: image/png")
+    @POST("files/{name}")
+    Observable<CreatedResult> upFile(@Path("name") String name, @Body RequestBody body);
+
+
+    @PUT("users/{uid}")
+    Observable<CreatedResult> upUser(@Header("X-LC-Session") String session, @Path("uid") String uid, @Body UserModel.Face face);
 
 
 }

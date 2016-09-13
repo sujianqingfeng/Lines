@@ -1,8 +1,11 @@
 package com.sujian.lines.ui.home;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
@@ -11,17 +14,23 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.sujian.lines.C;
 import com.sujian.lines.R;
 import com.sujian.lines.base.BaseActivity;
 import com.sujian.lines.base.BaseListFragment;
+import com.sujian.lines.base.util.ImageUtil;
 import com.sujian.lines.base.util.SpUtil;
 import com.sujian.lines.base.util.helper.FragmentAdapter;
+import com.sujian.lines.data.entity._User;
+import com.sujian.lines.ui.news.NewDetailedActivity;
+import com.sujian.lines.ui.user.UserActivity;
 import com.sujian.lines.view.viewholder.HomeItemVH;
 
 import java.util.ArrayList;
@@ -94,6 +103,8 @@ public class HomeActivity extends BaseActivity<HomePresenter,HomeModel> implemen
             }
             return true;
         });
+
+
     }
 
     @Override
@@ -103,5 +114,15 @@ public class HomeActivity extends BaseActivity<HomePresenter,HomeModel> implemen
         viewpager.setAdapter(new FragmentAdapter(getSupportFragmentManager(), fragments, Arrays.asList(mTabs)));
         tabs.setupWithViewPager(viewpager);
         tabs.setTabsFromPagerAdapter(viewpager.getAdapter());
+    }
+
+    @Override
+    public void initUserInfo(_User user) {
+        ImageUtil.loadRoundImg(iv_face, user.getFace());
+        tv_name.setText(user.getUsername());
+        iv_face.setOnClickListener(v ->
+            ActivityCompat.startActivity((Activity) mContext, new Intent(mContext, UserActivity.class).putExtra(C.HEAD_DATA, user)
+                    , ActivityOptionsCompat.makeSceneTransitionAnimation((Activity) mContext, iv_face, UserActivity.TRANSLATE_VIEW).toBundle())
+        );
     }
 }

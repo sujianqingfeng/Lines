@@ -8,8 +8,7 @@ import com.sujian.lines.R;
 import com.sujian.lines.base.BaseViewHolder;
 import com.sujian.lines.data.entity.Homeitem;
 
-import org.sufficientlysecure.htmltextview.HtmlHttpImageGetter;
-import org.sufficientlysecure.htmltextview.HtmlTextView;
+
 
 import butterknife.Bind;
 

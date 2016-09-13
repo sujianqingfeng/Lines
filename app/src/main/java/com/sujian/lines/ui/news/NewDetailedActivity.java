@@ -7,6 +7,7 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -32,7 +33,7 @@ import com.sujian.lines.view.viewholder.NewDetailedHeaderVH;
 import butterknife.Bind;
 import butterknife.OnClick;
 
-public class NewDetailedActivity extends BaseActivity<NewDetailedPresenter,NewDetailedModel> implements NewDetailedContract.View {
+public class NewDetailedActivity extends BaseActivity<NewDetailedPresenter, NewDetailedModel> implements NewDetailedContract.View {
     public static final String TRANSLATE_VIEW = "share_img";
 
     @Bind(R.id.image)
@@ -47,6 +48,7 @@ public class NewDetailedActivity extends BaseActivity<NewDetailedPresenter,NewDe
     Button bt_comment;
     @Bind(R.id.lv_comment)
     TRecyclerView lv_comment;
+
     @Override
     public int getLayoutId() {
         return R.layout.activity_new_detailed;
@@ -56,7 +58,7 @@ public class NewDetailedActivity extends BaseActivity<NewDetailedPresenter,NewDe
     public void initView() {
         Homeitem mSubject = (Homeitem) getIntent().getSerializableExtra(C.HEAD_DATA);
 
-        if (mSubject==null)
+        if (mSubject == null)
             return;
 
 
@@ -68,7 +70,7 @@ public class NewDetailedActivity extends BaseActivity<NewDetailedPresenter,NewDe
         setTitle(mSubject.getTitle());
         ViewCompat.setTransitionName(image, TRANSLATE_VIEW);
 
-        String s = "{\"nid\":\""+mSubject.getNid()+"\"}";
+        String s = "{\"nid\":\"" + mSubject.getNid() + "\"}";
 
         lv_comment.setHeadView(NewDetailedHeaderVH.class)
                 .setView(CommentItemVH.class)
@@ -78,12 +80,17 @@ public class NewDetailedActivity extends BaseActivity<NewDetailedPresenter,NewDe
                 .fetch();
 
 
-
-        bt_comment.setOnClickListener((view ->  mPresenter.createComment(
-                et_comment.getText().toString(),mSubject.getNid(), SpUtil.getUser())));
+        bt_comment.setOnClickListener((view -> {
+            String comment = et_comment.getText().toString().trim();
+            if (!TextUtils.isEmpty(comment)) {
+                mPresenter.createComment(
+                        comment, mSubject.getNid(), SpUtil.getUser());
+            } else {
+                ToastUtil.show("评论内容不能为空！");
+            }
+        }));
 
     }
-
 
 
     @Override
