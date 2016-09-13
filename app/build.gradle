@@ -52,5 +52,9 @@ dependencies {
     compile 'com.afollestad.material-dialogs:core:0.9.0.1'
 
     compile 'com.jakewharton.rxbinding:rxbinding:0.4.0'
+    /*日志*/
+    compile 'com.orhanobut:logger:1.15'
+
+    compile 'me.yokeyword:fragmentation:0.7.10'
 
 }

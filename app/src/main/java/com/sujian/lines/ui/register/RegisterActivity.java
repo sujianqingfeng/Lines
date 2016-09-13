@@ -13,6 +13,7 @@ import android.view.ViewAnimationUtils;
 import android.view.animation.AccelerateInterpolator;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RelativeLayout;
 
 import com.mobsandgeeks.saripaar.ValidationError;
 import com.mobsandgeeks.saripaar.Validator;
@@ -53,6 +54,8 @@ public class RegisterActivity extends BaseActivity<RegisterPresenter,RegisterMod
 
     @Bind(R.id.bt_go)
     Button bt_go;
+    @Bind(R.id.rl_root)
+    RelativeLayout rl_root;
 
     private Validator validator;
 
@@ -67,6 +70,8 @@ public class RegisterActivity extends BaseActivity<RegisterPresenter,RegisterMod
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             ShowEnterAnimation();
         }
+
+        rl_root.setBackgroundResource(R.mipmap.log_bg);
         validator=new Validator(this);
         validator.setValidationListener(this);
     }

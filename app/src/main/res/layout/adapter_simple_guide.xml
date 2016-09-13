@@ -2,6 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
+    android:fitsSystemWindows="true"
     android:layout_height="fill_parent">
 
     <ImageView
@@ -11,21 +12,6 @@
         android:scaleType="fitXY"
         tools:src="@mipmap/app_icon" />
 
-    <!--<TextView-->
-        <!--android:id="@+id/tv_jump"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_alignParentBottom="true"-->
-        <!--android:layout_centerHorizontal="true"-->
-        <!--android:layout_margin="15dp"-->
-        <!--android:background="@drawable/corner_white"-->
-        <!--android:paddingBottom="8dp"-->
-        <!--android:paddingLeft="30dp"-->
-        <!--android:paddingRight="30dp"-->
-        <!--android:paddingTop="8dp"-->
-        <!--android:text="立即体验"-->
-        <!--android:textColor="#ffffff"-->
-        <!--android:textSize="15sp" />-->
 
     <com.hanks.htextview.HTextView
         android:id="@+id/htv_jump"
@@ -34,7 +20,6 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="20dp"
-
         android:background="@android:color/transparent"
         android:gravity="center"
         android:textColor="@color/buleTextColor"

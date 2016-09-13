@@ -3,10 +3,7 @@ package com.sujian.lines.ui.user;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.view.ViewCompat;
 import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 
@@ -18,8 +15,6 @@ import com.sujian.lines.base.BaseActivity;
 import com.sujian.lines.base.util.ImageUtil;
 import com.sujian.lines.base.util.ToastUtil;
 import com.sujian.lines.data.entity._User;
-import com.sujian.lines.view.layout.TRecyclerView;
-import com.sujian.lines.view.viewholder.UserItemVH;
 
 import java.io.File;
 
@@ -27,7 +22,6 @@ import butterknife.Bind;
 import cn.finalteam.rxgalleryfinal.RxGalleryFinal;
 import cn.finalteam.rxgalleryfinal.imageloader.ImageLoaderType;
 import cn.finalteam.rxgalleryfinal.rxbus.RxBusResultSubscriber;
-import cn.finalteam.rxgalleryfinal.rxbus.event.BaseResultEvent;
 import cn.finalteam.rxgalleryfinal.rxbus.event.ImageRadioResultEvent;
 
 public class UserActivity extends BaseActivity<UserPresenter, UserModel> implements UserContract.View {
@@ -40,8 +34,7 @@ public class UserActivity extends BaseActivity<UserPresenter, UserModel> impleme
     FloatingActionButton fab;
     @Bind(R.id.toolbar)
     Toolbar toolbar;
-    @Bind(R.id.lv_user)
-    TRecyclerView lv_user;
+
     @Bind(R.id.im_header)
     ImageView im_header;
 
@@ -59,9 +52,7 @@ public class UserActivity extends BaseActivity<UserPresenter, UserModel> impleme
         ab.setDisplayHomeAsUpEnabled(true);
         ViewCompat.setTransitionName(image, TRANSLATE_VIEW);
 
-        lv_user.setHeadView(UserItemVH.class)
-                .setIsRefreshable(false)
-                .fetch();
+
 
         fab.setOnClickListener((view ->
                 chooseDialog()

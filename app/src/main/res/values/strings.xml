@@ -12,4 +12,15 @@
     <string name="next">Next</string>
     <string name="picturechoose">头像选择</string>
     <string name="choose">选择</string>
+
+
+    <string name="zhihu">知乎日报</string>
+    <string name="wechat">微信精选</string>
+    <string name="gank">干货集中营</string>
+    <string name="drawer_about">关于</string>
+    <string name="drawer_collection">收藏</string>
+    <string name="drawer_setting">设置</string>
+    <string name="drawer_group_content">资讯</string>
+    <string name="drawer_group_options">选项</string>
+    <string name="drawer_toggle">切换</string>
 </resources>

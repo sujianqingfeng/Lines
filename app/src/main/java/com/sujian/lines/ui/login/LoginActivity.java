@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RelativeLayout;
 
 import com.mobsandgeeks.saripaar.ValidationError;
 import com.mobsandgeeks.saripaar.Validator;
@@ -49,6 +50,9 @@ public class LoginActivity extends BaseActivity<LoginPresenter,LoginModel> imple
     @Bind(R.id.bt_go)
     Button bt_go;
 
+    @Bind(R.id.rl_root)
+    RelativeLayout rl_root;
+
     private Validator validator;
 
     @Override
@@ -61,6 +65,8 @@ public class LoginActivity extends BaseActivity<LoginPresenter,LoginModel> imple
 
         validator=new Validator(this);
         validator.setValidationListener(this);
+
+        rl_root.setBackgroundResource(R.mipmap.log_bg);
     }
 
     //注册按钮点击事件

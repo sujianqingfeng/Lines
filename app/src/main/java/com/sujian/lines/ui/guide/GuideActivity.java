@@ -6,6 +6,7 @@ import android.support.v4.view.ViewPager;
 import com.flyco.banner.anim.select.ZoomInEnter;
 import com.sujian.lines.R;
 import com.sujian.lines.base.BaseActivity;
+import com.sujian.lines.base.util.SpUtil;
 import com.sujian.lines.base.util.StatusBarUtil;
 import com.sujian.lines.ui.login.LoginActivity;
 import com.sujian.lines.ui.register.RegisterActivity;
@@ -53,7 +54,9 @@ public class GuideActivity extends BaseActivity {
         sgb_guide.setOnJumpClickL(new SimpleGuideBanner.OnJumpClickL() {
             @Override
             public void onJumpClick() {
+                SpUtil.setFirst();
                 startActivity(new Intent(mContext, LoginActivity.class));
+                finish();
             }
         });
     }

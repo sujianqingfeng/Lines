@@ -1,9 +1,8 @@
 package com.sujian.lines.base;
 
 import android.support.annotation.NonNull;
+import android.util.Log;
 
-
-import com.sujian.lines.base.util.LogUtil;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -64,7 +63,7 @@ public class RxBus {
         }
         Subject<T, T> subject;
         subjectList.add(subject = PublishSubject.create());
-        LogUtil.d("register", tag + "  size:" + subjectList.size());
+        Log.d("register", tag + "  size:" + subjectList.size());
         return subject;
     }
 
@@ -93,7 +92,7 @@ public class RxBus {
             subjects.remove((Subject<?, ?>) observable);
             if (isEmpty(subjects)) {
                 subjectMapper.remove(tag);
-                LogUtil.d("unregister", tag + "  size:" + subjects.size());
+                Log.d("unregister", tag + "  size:" + subjects.size());
             }
         }
         return $();
@@ -110,12 +109,12 @@ public class RxBus {
      */
     @SuppressWarnings({"unchecked", "rawtypes"})
     public void post(@NonNull Object tag, @NonNull Object content) {
-        LogUtil.d("post", "eventName: " + tag);
+        Log.d("post", "eventName: " + tag);
         List<Subject> subjectList = subjectMapper.get(tag);
         if (!isEmpty(subjectList)) {
             for (Subject subject : subjectList) {
                 subject.onNext(content);
-                LogUtil.d("onEvent", "eventName: " + tag);
+                Log.d("onEvent", "eventName: " + tag);
             }
         }
     }

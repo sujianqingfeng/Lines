@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
+import com.sujian.lines.App;
 import com.sujian.lines.R;
 import com.sujian.lines.base.util.SpUtil;
 import com.sujian.lines.base.util.StatusBarUtil;
@@ -16,9 +17,10 @@ import com.sujian.lines.base.util.TUtil;
 import com.sujian.lines.view.layout.SwipeBackLayout;
 
 import butterknife.ButterKnife;
+import me.yokeyword.fragmentation.SupportActivity;
 
 
-public abstract class BaseActivity<T extends BasePresenter, E extends BaseModel> extends AppCompatActivity {
+public abstract class BaseActivity<T extends BasePresenter, E extends BaseModel> extends SupportActivity {
     public boolean isNight;
     public T mPresenter;
     public E mModel;
@@ -38,8 +40,11 @@ public abstract class BaseActivity<T extends BasePresenter, E extends BaseModel>
         mPresenter = TUtil.getT(this, 0);
         mModel = TUtil.getT(this, 1);
         StatusBarUtil.setTransparent(this);
+
         this.initView();
+
         if (this instanceof BaseView) mPresenter.setVM(this, mModel);
+        App.getAppContext().addActivity(this);
     }
 
     @Override
@@ -47,6 +52,7 @@ public abstract class BaseActivity<T extends BasePresenter, E extends BaseModel>
         super.onDestroy();
         if (mPresenter != null) mPresenter.onDestroy();
         ButterKnife.unbind(this);
+        App.getAppContext().removeActivity(this);
     }
 
     @Override
@@ -66,7 +72,7 @@ public abstract class BaseActivity<T extends BasePresenter, E extends BaseModel>
 
     @Override
     public void setContentView(int layoutResID) {
-        if (layoutResID == R.layout.activity_splash || layoutResID == R.layout.activity_splash) {
+        if (layoutResID == R.layout.activity_home || layoutResID == R.layout.activity_splash) {
             super.setContentView(layoutResID);
         } else {
             super.setContentView(getContainer());
