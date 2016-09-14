@@ -9,6 +9,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.sujian.lines.base.util.TUtil;
+import com.sujian.lines.base.util.ViewUtil;
+import com.sujian.lines.view.layout.LoadingPage;
 
 import butterknife.ButterKnife;
 import me.yokeyword.fragmentation.SupportFragment;
@@ -33,7 +35,8 @@ public abstract class BaseFragment<T extends BasePresenter, E extends BaseModel>
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(getLayoutId(), null);
+
+        return View.inflate(getActivity(),getLayoutId(),null);
 
     }
 

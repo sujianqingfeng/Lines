@@ -2,6 +2,9 @@ package com.sujian.lines;
 
 import org.junit.Test;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import static org.junit.Assert.*;
 
 /**
@@ -10,6 +13,7 @@ import static org.junit.Assert.*;
 public class ExampleUnitTest {
     @Test
     public void addition_isCorrect() throws Exception {
-        assertEquals(4, 2 + 2);
+        SimpleDateFormat df = new SimpleDateFormat("yyyyMMdd");
+        System.err.println(String.valueOf(Integer.valueOf(df.format(new Date())) + 1));
     }
 }

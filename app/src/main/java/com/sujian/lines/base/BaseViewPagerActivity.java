@@ -1,8 +1,10 @@
 package com.sujian.lines.base;
 
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
+import android.view.View;
 
 import com.orhanobut.logger.Logger;
 import com.sujian.lines.R;
@@ -22,10 +24,12 @@ public abstract class BaseViewPagerActivity<T extends BasePresenter, E extends B
 
     //viewpager
     @Bind(R.id.viewpager)
+    protected
     ViewPager viewpager;
     //tablayout
     @Bind(R.id.tablayout)
     TabLayout tabLayout;
+
     //装载fragment
     protected List<SupportFragment> fragments;
     //装载标题
@@ -57,6 +61,7 @@ public abstract class BaseViewPagerActivity<T extends BasePresenter, E extends B
                 fragments,
                 titles);
         viewpager.setAdapter(baseFragmentPagerAdapter);
+
 
         initTabLayout();
     }

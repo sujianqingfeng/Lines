@@ -57,6 +57,8 @@ public class C {
     public static final String EVENT_HEADDATA = "get_headdata";
     public static final String EVENT_COUNT = "get_count";
 
+    public static final String EVENT_TIME = "time";
+
     // TagName
     public static final String TAG_EDITABLE = "editable";
     public static final String TAG_HEADDATA = "with_headdata";

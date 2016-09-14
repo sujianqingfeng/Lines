@@ -1,14 +1,18 @@
 package com.sujian.lines.api;
 
 import com.sujian.lines.data.CreatedResult;
-import com.sujian.lines.data.Data;
-import com.sujian.lines.data.entity.Comment;
-import com.sujian.lines.data.entity.CommentInfo;
-import com.sujian.lines.data.entity.Homeitem;
-import com.sujian.lines.data.entity.HomeitemInfo;
+import com.sujian.lines.data.entity.CommentBean;
+import com.sujian.lines.data.entity.DailyBeforeListBean;
+import com.sujian.lines.data.entity.DailyListBean;
+import com.sujian.lines.data.entity.DetailExtraBean;
+import com.sujian.lines.data.entity.HotListBean;
+import com.sujian.lines.data.entity.SectionChildListBean;
+import com.sujian.lines.data.entity.SectionListBean;
+import com.sujian.lines.data.entity.ThemeChildListBean;
+import com.sujian.lines.data.entity.ThemeListBean;
+import com.sujian.lines.data.entity.ZhihuDetailBean;
 import com.sujian.lines.data.entity._User;
 import com.sujian.lines.ui.user.UserModel;
-
 
 import okhttp3.RequestBody;
 import retrofit2.http.Body;
@@ -31,14 +35,7 @@ public interface ApiService {
     @GET("login")
     Observable<_User> login(@Query("username") String username, @Query("password") String password);
 
-    @GET("109-35?maxResult=20&needContent=1&showapi_appid=24251&showapi_sign=14f6b2f44ca6481e89b2d8b6153a3c4a")
-    Observable<HomeitemInfo> getHomeItemInfo(@Query("channelName") String channelName, @Query("page") int page);
 
-    @POST("classes/Comment")
-    Observable<CreatedResult> createComment(@Body Comment mComment);
-
-    @GET("classes/Comment")
-    Observable<Data<CommentInfo>> getCommentList(@Query("include") String include, @Query("where") String where, @Query("skip") int skip, @Query("limit") int limit);
 
     @Headers("Content-Type: image/png")
     @POST("files/{name}")
@@ -47,6 +44,76 @@ public interface ApiService {
 
     @PUT("users/{uid}")
     Observable<CreatedResult> upUser(@Header("X-LC-Session") String session, @Path("uid") String uid, @Body UserModel.Face face);
+
+
+
+
+    //知乎
+    /**
+     * 最新日报
+     */
+    @GET("news/latest")
+    Observable<DailyListBean> getDailyList();
+
+    /**
+     * 往期日报
+     */
+    @GET("news/before/{date}")
+    Observable<DailyBeforeListBean> getDailyBeforeList(@Path("date") String date);
+
+    /**
+     * 主题日报
+     */
+    @GET("themes")
+    Observable<ThemeListBean> getThemeList();
+
+    /**
+     * 主题日报详情
+     */
+    @GET("theme/{id}")
+    Observable<ThemeChildListBean> getThemeChildList(@Path("id") int id);
+
+    /**
+     * 专栏日报
+     */
+    @GET("sections")
+    Observable<SectionListBean> getSectionList();
+
+    /**
+     * 专栏日报详情
+     */
+    @GET("section/{id}")
+    Observable<SectionChildListBean> getSectionChildList(@Path("id") int id);
+
+    /**
+     * 热门日报
+     */
+    @GET("news/hot")
+    Observable<HotListBean> getHotList();
+
+    /**
+     * 日报详情
+     */
+    @GET("news/{id}")
+    Observable<ZhihuDetailBean> getDetailInfo(@Path("id") int id);
+
+    /**
+     * 日报的额外信息
+     */
+    @GET("story-extra/{id}")
+    Observable<DetailExtraBean> getDetailExtraInfo(@Path("id") int id);
+
+    /**
+     * 日报的长评论
+     */
+    @GET("story/{id}/long-comments")
+    Observable<CommentBean> getLongCommentInfo(@Path("id") int id);
+
+    /**
+     * 日报的短评论
+     */
+    @GET("story/{id}/short-comments")
+    Observable<CommentBean> getShortCommentInfo(@Path("id") int id);
 
 
 }

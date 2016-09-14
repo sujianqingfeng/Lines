@@ -24,13 +24,12 @@ import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
- * Created by baixiaokang on 16/3/9.
+ * 知乎
  */
-public class NewApi {
+public class ZhiHuApi {
 
 
-    public static final String BASE_URL = "http://route.showapi.com/";
-
+    public static final String BASE_URL = "http://news-at.zhihu.com/api/4/";
 
     public static final int DEFAULT_TIMEOUT = 5;
 
@@ -38,11 +37,12 @@ public class NewApi {
     public ApiService service;
 
     Interceptor mInterceptor = (chain) -> chain.proceed(chain.request().newBuilder()
+
             .addHeader("Content-Type", "application/json")
             .build());
 
     //构造方法私有
-    private NewApi() {
+    private ZhiHuApi() {
         HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
         interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
 
@@ -71,13 +71,15 @@ public class NewApi {
         service = retrofit.create(ApiService.class);
     }
 
+
+
     //在访问HttpMethods时创建单例
     private static class SingletonHolder {
-        private static final NewApi INSTANCE = new NewApi();
+        private static final ZhiHuApi INSTANCE = new ZhiHuApi();
     }
 
     //获取单例
-    public static NewApi getInstance() {
+    public static ZhiHuApi getInstance() {
         return SingletonHolder.INSTANCE;
     }
 

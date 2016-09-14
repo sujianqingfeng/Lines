@@ -16,7 +16,7 @@ import java.util.Set;
 public class App extends Application {
     private static App mApp;
     private Set<Activity> allActivities;
-
+    public static int SCREEN_WIDTH = -1;
 
     @Override
     public void onCreate() {

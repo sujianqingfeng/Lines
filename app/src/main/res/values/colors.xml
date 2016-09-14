@@ -10,4 +10,10 @@
     <color name="theme_black_7f">#8f000000</color>
 
     <color name="fab_bg">#FF4081</color>
+    <color name="news_unread">#000000</color>
+    <color name="news_read">#898989</color>
+    <color name="colorBackground">#EEEEEE</color>
+    <color name="colorCard">#FFFFFF</color>
+    <color name="colorText">#2C2C2C</color>
+    <color name="bottom_shadow">#6e000000</color>
 </resources>

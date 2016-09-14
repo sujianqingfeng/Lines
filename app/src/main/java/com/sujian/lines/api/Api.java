@@ -74,6 +74,8 @@ public class Api {
         service = retrofit.create(ApiService.class);
     }
 
+
+
     //在访问HttpMethods时创建单例
     private static class SingletonHolder {
         private static final Api INSTANCE = new Api();

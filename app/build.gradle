@@ -27,34 +27,40 @@ android {
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     testCompile 'junit:junit:4.12'
+    /*UI*/
     compile 'com.android.support:cardview-v7:24.2.0'
     compile 'com.android.support:recyclerview-v7:24.2.0'
-    compile 'com.squareup.retrofit2:retrofit:2.0.0-beta3'
-    compile 'com.squareup.okhttp3:logging-interceptor:3.1.2'
-    compile 'io.reactivex:rxandroid:1.0.1'
-    compile 'com.squareup.retrofit2:converter-gson:2.0.0-beta4'
-    compile 'com.squareup.retrofit2:adapter-rxjava:2.0.0-beta4'
-    compile 'com.google.code.gson:gson:2.6.2'
-    compile 'com.github.bumptech.glide:glide:3.6.1'
     compile 'com.android.support:appcompat-v7:24.2.0'
     compile 'com.android.support:design:24.2.0'
+    /*依赖注解*/
     compile 'com.jakewharton:butterknife:7.0.1'
-
+    /*图片加载*/
+    compile 'com.github.bumptech.glide:glide:3.6.1'
+    /*网络请求*/
+    compile 'com.squareup.retrofit2:retrofit:2.0.0-beta3'
+    compile 'com.squareup.okhttp3:logging-interceptor:3.1.2'
+    compile 'com.squareup.retrofit2:converter-gson:2.0.0-beta4'
+    compile 'com.google.code.gson:gson:2.6.2'
+    /*rxjava 响应式编程*/
+    compile 'com.squareup.retrofit2:adapter-rxjava:2.0.0-beta4'
+    compile 'io.reactivex:rxandroid:1.0.1'
+    compile 'com.jakewharton.rxbinding:rxbinding:0.4.0'
+    /*文字动画*/
     compile 'hanks.xyz:htextview-library:0.1.5'
-
+    /*banner*/
     compile 'com.nineoldandroids:library:2.4.0'
     compile 'com.flyco.banner:FlycoBanner_Lib:2.0.2@aar'
-
+    /*验证*/
     compile 'com.mobsandgeeks:android-saripaar:2.0.0'
-
+    /*图片选择 裁剪*/
     compile 'cn.finalteam.rxgalleryfinal:library:0.0.2'
-
+    /*对话框*/
     compile 'com.afollestad.material-dialogs:core:0.9.0.1'
-
-    compile 'com.jakewharton.rxbinding:rxbinding:0.4.0'
     /*日志*/
     compile 'com.orhanobut:logger:1.15'
-
+    /*fragment*/
     compile 'me.yokeyword:fragmentation:0.7.10'
+    /*加载视图*/
+    compile 'com.wang.avi:library:2.1.3'
 
 }

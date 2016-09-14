@@ -8,23 +8,51 @@ import android.support.v7.widget.RecyclerView;
 
 import com.sujian.lines.R;
 import com.sujian.lines.base.BaseFragment;
+import com.sujian.lines.data.entity.ThemeListBean;
+import com.sujian.lines.view.layout.LoadingPage;
+import com.wang.avi.AVLoadingIndicatorView;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import butterknife.Bind;
 
 
 /**
  * 主题
  */
 public class ThemeFragment extends BaseFragment<ThemePresenter,ThemeModel> implements ThemeContract.View{
+    @Bind(R.id.rv_theme_list)
+    RecyclerView rvThemeList;
+    @Bind(R.id.view_loading)
+    AVLoadingIndicatorView viewLoading;
+    @Bind(R.id.swipe_refresh)
+    SwipeRefreshLayout swipeRefresh;
+
+    ThemeAdapter mAdapter;
+    List<ThemeListBean.OthersBean> mList = new ArrayList<>();
 
     @Override
     protected void initView() {
-
+        mAdapter = new ThemeAdapter(mContext, mList);
+        rvThemeList.setLayoutManager(new GridLayoutManager(mContext, 2));
+        rvThemeList.setAdapter(mAdapter);
     }
 
     @Override
     public int getLayoutId() {
         return R.layout.fragment_theme;
+    }
+
+    @Override
+    public void showTheme(ThemeListBean themeListBean) {
+        if(swipeRefresh.isRefreshing()) {
+            swipeRefresh.setRefreshing(false);
+        } else {
+            viewLoading.smoothToHide();
+        }
+        mList.clear();
+        mList.addAll(themeListBean.getOthers());
+        mAdapter.notifyDataSetChanged();
     }
 }
