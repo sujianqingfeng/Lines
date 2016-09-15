@@ -1,19 +1,14 @@
 package com.sujian.lines.base;
 
-import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
-import android.view.View;
 
-import com.orhanobut.logger.Logger;
 import com.sujian.lines.R;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.Bind;
-import me.yokeyword.fragmentation.SupportFragment;
 
 /**
  * 带有viewpager 和 侧边 的activity 的基类
@@ -31,7 +26,7 @@ public abstract class BaseViewPagerActivity<T extends BasePresenter, E extends B
     TabLayout tabLayout;
 
     //装载fragment
-    protected List<SupportFragment> fragments;
+    protected List<BaseFragment> fragments;
     //装载标题
     protected List<String> titles;
     //viewpager的适配器

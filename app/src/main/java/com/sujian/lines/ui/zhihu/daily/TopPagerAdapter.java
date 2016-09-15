@@ -50,7 +50,7 @@ public class TopPagerAdapter extends PagerAdapter {
         ImageView ivImage = (ImageView) view.findViewById(R.id.iv_top_image);
         TextView tvTitle = (TextView) view.findViewById(R.id.tv_top_title);
 
-        ImageUtil.loadImg(ivImage,mList.get(position).getImage());
+        ImageUtil.loadImg(mContext,ivImage,mList.get(position).getImage());
         tvTitle.setText(mList.get(position).getTitle());
         final int id = mList.get(position).getId();
         view.setOnClickListener(new View.OnClickListener() {

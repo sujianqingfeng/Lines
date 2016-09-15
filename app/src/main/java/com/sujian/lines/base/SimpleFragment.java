@@ -4,20 +4,19 @@ import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-
 import butterknife.ButterKnife;
-import me.yokeyword.fragmentation.SupportFragment;
 
 /**
  * Created by codeest on 16/8/11.
  * 无MVP的Fragment基类
  */
 
-public abstract class SimpleFragment extends SupportFragment {
+public abstract class SimpleFragment extends Fragment {
 
     protected View mView;
     protected Activity mActivity;
@@ -44,11 +43,6 @@ public abstract class SimpleFragment extends SupportFragment {
         ButterKnife.bind(this, view);
         if (savedInstanceState == null) {
             if (!isHidden()) {
-                isInited = true;
-                initEventAndData();
-            }
-        } else {
-            if (!isSupportHidden()) {
                 isInited = true;
                 initEventAndData();
             }

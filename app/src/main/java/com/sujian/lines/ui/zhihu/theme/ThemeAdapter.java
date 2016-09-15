@@ -50,7 +50,7 @@ public class ThemeAdapter extends RecyclerView.Adapter<ThemeAdapter.ViewHolder>{
 //        ViewGroup.LayoutParams lp = holder.ivBg.getLayoutParams();
 //        lp.width = (App.SCREEN_WIDTH - ViewUtil.dp2px(mContext,12)) / 2;
 //        lp.height = ViewUtil.dp2px(mContext,120);
-        ImageUtil.loadImg(holder.ivBg,mList.get(position).getThumbnail());
+        ImageUtil.loadImg(mContext,holder.ivBg,mList.get(position).getThumbnail());
         holder.tvKind.setText(mList.get(position).getName());
 
 

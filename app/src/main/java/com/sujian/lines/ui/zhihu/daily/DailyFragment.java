@@ -1,13 +1,19 @@
 package com.sujian.lines.ui.zhihu.daily;
 
+import android.annotation.TargetApi;
+import android.app.ActivityOptions;
+import android.content.Intent;
+import android.os.Build;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 
 import com.sujian.lines.R;
 import com.sujian.lines.base.BaseFragment;
 import com.sujian.lines.data.entity.DailyBeforeListBean;
 import com.sujian.lines.data.entity.DailyListBean;
+import com.sujian.lines.ui.zhihu.activity.ZhihuDetailActivity;
 import com.wang.avi.AVLoadingIndicatorView;
 
 import java.util.ArrayList;
@@ -36,6 +42,27 @@ public class DailyFragment extends BaseFragment<DailyPresenter,DailyModel> imple
     protected void initView() {
         mList = new ArrayList<>();
         mAdapter = new DailyAdapter(mContext,mList);
+
+
+        mAdapter.setOnItemClickListener(new DailyAdapter.OnItemClickListener() {
+            @TargetApi(Build.VERSION_CODES.LOLLIPOP)
+            @Override
+            public void onItemClick(int position, View shareView) {
+                if(mAdapter.getIsBefore()) {
+                    mAdapter.notifyItemChanged(position + 1);
+                } else {
+                    mAdapter.notifyItemChanged(position + 2);
+                }
+                Intent intent = new Intent();
+                intent.setClass(mContext, ZhihuDetailActivity.class);
+                intent.putExtra("id",mList.get(position).getId());
+                ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(getActivity(), shareView, "shareView");
+                mContext.startActivity(intent,options.toBundle());
+            }
+        });
+
+
+
 
         rvDailyList.setLayoutManager(new LinearLayoutManager(mContext));
         rvDailyList.setAdapter(mAdapter);

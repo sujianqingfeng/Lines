@@ -14,8 +14,6 @@ public class HomePresenter extends HomeContract.Presenter {
 
     @Override
     public void onStart() {
-        showTabs();
-        getUserInfo();
         mRxManager.on(C.EVENT_LOGIN, arg -> mView.initUserInfo((_User) arg));
     }
 

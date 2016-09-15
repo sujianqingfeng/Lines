@@ -29,16 +29,16 @@ import java.io.IOException;
  * Created by baixiaokang on 16/5/6.
  */
 public class ImageUtil {
-    public static void loadImg(ImageView v, String url) {
-        Glide.with(v.getContext())
+    public static void loadImg(Context context,ImageView v, String url) {
+        Glide.with(context)
                 .load(getFuckUrl(url))
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .into(v);
 
     }
 
-    public static void loadRoundImg(ImageView v, String url) {
-        Glide.with(v.getContext())
+    public static void loadRoundImg(Context context,ImageView v, String url) {
+        Glide.with(context)
                 .load(getFuckUrl(url))
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .transform(new GlideCircleTransform(v.getContext()))

@@ -5,7 +5,6 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.content.Intent;
-import android.icu.util.Calendar;
 import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
@@ -39,6 +38,8 @@ import com.sujian.lines.ui.zhihu.hot.HotFragment;
 import com.sujian.lines.ui.zhihu.section.SectionFragment;
 import com.sujian.lines.ui.zhihu.theme.ThemeFragment;
 
+import java.util.Calendar;
+
 import butterknife.Bind;
 @ActivityFragmentInject(menuDefaultCheckedItem = R.id.drawer_zhihu,toolbarTitle = R.string.zhihu)
 public class HomeActivity extends BaseViewPagerActivity<HomePresenter,HomeModel> implements HomeContract.View {
@@ -62,6 +63,10 @@ public class HomeActivity extends BaseViewPagerActivity<HomePresenter,HomeModel>
     @Override
     public void initView() {
         super.initView();
+
+        mPresenter.showTabs();
+        mPresenter.getUserInfo();
+
         fab.setVisibility(View.VISIBLE);
         viewpager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
@@ -128,7 +133,7 @@ public class HomeActivity extends BaseViewPagerActivity<HomePresenter,HomeModel>
 
     @Override
     public void initUserInfo(_User user) {
-        ImageUtil.loadRoundImg(iv_face, user.getFace());
+        ImageUtil.loadRoundImg(mContext,iv_face, user.getFace());
         tv_name.setText(user.getUsername());
         iv_face.setOnClickListener(v ->
                 ActivityCompat.startActivity((Activity) mContext, new Intent(mContext, UserActivity.class).putExtra(C.HEAD_DATA, user)

@@ -102,7 +102,7 @@ public class DailyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
                 ((ContentViewHolder)holder).title.setTextColor(ContextCompat.getColor(mContext,R.color.news_unread));
             }
 
-            ImageUtil.loadImg(((ContentViewHolder)holder).image,mList.get(contentPosition).getImages().get(0));
+            ImageUtil.loadImg(mContext,((ContentViewHolder)holder).image,mList.get(contentPosition).getImages().get(0));
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {

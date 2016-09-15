@@ -57,7 +57,7 @@ public class HotAdapter extends RecyclerView.Adapter<HotAdapter.ViewHolder>{
             holder.title.setTextColor(ContextCompat.getColor(mContext,R.color.news_unread));
         }
 
-        ImageUtil.loadImg(holder.image,mList.get(position).getThumbnail());
+        ImageUtil.loadImg(mContext,holder.image,mList.get(position).getThumbnail());
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

@@ -87,7 +87,7 @@ public class UserActivity extends BaseActivity<UserPresenter, UserModel> impleme
                     @Override
                     protected void onEvent(ImageRadioResultEvent imageRadioResultEvent) throws Exception {
                         String cropPath = imageRadioResultEvent.getResult().getCropPath();
-                        ImageUtil.loadRoundImg(image, cropPath);
+                        ImageUtil.loadRoundImg(mContext,image, cropPath);
 
                         File file = new File(cropPath);
                         mPresenter.upLoadFace(file);
