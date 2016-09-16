@@ -1,11 +1,10 @@
-package com.sujian.lines.ui.zhihu.activity;
+package com.sujian.lines.ui.zhihu.detail;
 
 import com.orhanobut.logger.Logger;
 import com.sujian.lines.data.entity.DetailExtraBean;
 import com.sujian.lines.data.entity.ZhihuDetailBean;
 
 import rx.Subscriber;
-import rx.functions.Action1;
 
 /**
  * Created by sujian on 2016/9/15.

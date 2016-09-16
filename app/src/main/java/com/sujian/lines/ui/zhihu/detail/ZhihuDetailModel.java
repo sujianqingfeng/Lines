@@ -1,4 +1,4 @@
-package com.sujian.lines.ui.zhihu.activity;
+package com.sujian.lines.ui.zhihu.detail;
 
 import com.sujian.lines.api.ZhiHuApi;
 import com.sujian.lines.base.util.helper.RxSchedulers;

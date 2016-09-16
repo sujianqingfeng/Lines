@@ -13,7 +13,7 @@ import com.sujian.lines.R;
 import com.sujian.lines.base.BaseFragment;
 import com.sujian.lines.data.entity.DailyBeforeListBean;
 import com.sujian.lines.data.entity.DailyListBean;
-import com.sujian.lines.ui.zhihu.activity.ZhihuDetailActivity;
+import com.sujian.lines.ui.zhihu.detail.ZhihuDetailActivity;
 import com.wang.avi.AVLoadingIndicatorView;
 
 import java.util.ArrayList;

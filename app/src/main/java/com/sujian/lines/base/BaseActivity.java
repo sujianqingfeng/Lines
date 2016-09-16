@@ -6,6 +6,7 @@ import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
@@ -101,6 +102,21 @@ public abstract class BaseActivity<T extends BasePresenter, E extends BaseModel>
         container.addView(swipeBackLayout);
         swipeBackLayout.setOnSwipeBackListener((fa, fs) -> ivShadow.setAlpha(1 - fs));
         return container;
+    }
+
+
+
+    protected void setToolBar(Toolbar toolbar, String title) {
+        toolbar.setTitle(title);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
     }
 
 

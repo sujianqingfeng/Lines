@@ -46,8 +46,9 @@
         <activity android:name=".ui.like.LikeActivity" />
         <activity android:name=".ui.setting.SettingActivity" />
         <activity android:name=".ui.about.AboutMeActivity" />
-        <activity android:name=".ui.zhihu.activity.ZhihuDetailActivity"  />
-        <activity android:name=".ui.zhihu.section.activity.SectionActivity"></activity>
+        <activity android:name=".ui.zhihu.detail.ZhihuDetailActivity" />
+        <activity android:name=".ui.zhihu.section.activity.SectionActivity" />
+        <activity android:name=".ui.zhihu.comment.CommentActivity"></activity>
     </application>
 
 </manifest>

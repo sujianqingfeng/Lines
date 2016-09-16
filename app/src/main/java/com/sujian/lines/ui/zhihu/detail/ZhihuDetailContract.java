@@ -1,4 +1,4 @@
-package com.sujian.lines.ui.zhihu.activity;
+package com.sujian.lines.ui.zhihu.detail;
 
 import com.sujian.lines.base.BaseModel;
 import com.sujian.lines.base.BasePresenter;

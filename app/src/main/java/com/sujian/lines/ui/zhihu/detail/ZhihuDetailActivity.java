@@ -1,4 +1,4 @@
-package com.sujian.lines.ui.zhihu.activity;
+package com.sujian.lines.ui.zhihu.detail;
 
 import android.annotation.TargetApi;
 import android.content.Intent;
@@ -21,13 +21,16 @@ import com.sujian.lines.base.BaseActivity;
 import com.sujian.lines.base.util.HtmlUtil;
 import com.sujian.lines.base.util.ImageUtil;
 import com.sujian.lines.base.util.NetWorkUtil;
+import com.sujian.lines.base.util.ShareUtil;
 import com.sujian.lines.base.util.SpUtil;
 import com.sujian.lines.data.entity.DetailExtraBean;
 import com.sujian.lines.data.entity.ZhihuDetailBean;
+import com.sujian.lines.ui.zhihu.comment.CommentActivity;
 import com.wang.avi.AVLoadingIndicatorView;
 
 
 import butterknife.Bind;
+import butterknife.OnClick;
 
 public class ZhihuDetailActivity extends BaseActivity<ZhihuDetailPresenter,ZhihuDetailModel> implements ZhihuDetailContract.View {
 
@@ -151,21 +154,6 @@ public class ZhihuDetailActivity extends BaseActivity<ZhihuDetailPresenter,Zhihu
     }
 
 
-
-
-    protected void setToolBar(Toolbar toolbar, String title) {
-        toolbar.setTitle(title);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setDisplayShowHomeEnabled(true);
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-               finish();
-            }
-        });
-    }
-
     @Override
     public void showDetailData(ZhihuDetailBean zhihuDetailBean) {
         viewLoading.smoothToHide();
@@ -188,5 +176,24 @@ public class ZhihuDetailActivity extends BaseActivity<ZhihuDetailPresenter,Zhihu
         allNum = detailExtraBean.getComments();
         shortNum = detailExtraBean.getShort_comments();
         longNum = detailExtraBean.getLong_comments();
+    }
+
+
+
+    @OnClick(R.id.tv_detail_bottom_comment)
+    void gotoComment() {
+        Intent intent = getIntent();
+        intent.setClass(this,CommentActivity.class);
+        intent.putExtra("id",id);
+        intent.putExtra("allNum",allNum);
+        intent.putExtra("shortNum",shortNum);
+        intent.putExtra("longNum",longNum);
+        startActivity(intent);
+    }
+
+
+    @OnClick(R.id.tv_detail_bottom_share)
+    void shareUrl() {
+        ShareUtil.shareText(mContext,shareUrl,"分享一篇文章");
     }
 }
