@@ -32,6 +32,19 @@ public class DateUtil {
         return formatTime2String(showTime,false);
     }
 
+
+    /**
+     * 获取当前日期字符串
+     * @return
+     */
+    public static String getCurrentDateString() {
+        SimpleDateFormat df = new SimpleDateFormat("yyyy年MM月dd日");
+        return df.format(new Date());
+    }
+
+
+
+
     public static String formatTime2String(long showTime , boolean haveYear) {
         String str = "";
         long distance = System.currentTimeMillis()/1000 - showTime;

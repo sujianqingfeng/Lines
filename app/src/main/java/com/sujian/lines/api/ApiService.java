@@ -5,14 +5,21 @@ import com.sujian.lines.data.entity.CommentBean;
 import com.sujian.lines.data.entity.DailyBeforeListBean;
 import com.sujian.lines.data.entity.DailyListBean;
 import com.sujian.lines.data.entity.DetailExtraBean;
+import com.sujian.lines.data.entity.GankHttpResponse;
+import com.sujian.lines.data.entity.GankItemBean;
+import com.sujian.lines.data.entity.GankSearchItemBean;
 import com.sujian.lines.data.entity.HotListBean;
 import com.sujian.lines.data.entity.SectionChildListBean;
 import com.sujian.lines.data.entity.SectionListBean;
 import com.sujian.lines.data.entity.ThemeChildListBean;
 import com.sujian.lines.data.entity.ThemeListBean;
+import com.sujian.lines.data.entity.WXHttpResponse;
+import com.sujian.lines.data.entity.WXItemBean;
 import com.sujian.lines.data.entity.ZhihuDetailBean;
 import com.sujian.lines.data.entity._User;
 import com.sujian.lines.ui.user.UserModel;
+
+import java.util.List;
 
 import okhttp3.RequestBody;
 import retrofit2.http.Body;
@@ -114,6 +121,44 @@ public interface ApiService {
      */
     @GET("story/{id}/short-comments")
     Observable<CommentBean> getShortCommentInfo(@Path("id") int id);
+
+
+    /**
+     * 微信精选列表
+     */
+    @GET("wxhot")
+    Observable<WXHttpResponse<List<WXItemBean>>> getWXHot(@Query("num") int num, @Query("page") int page);
+
+    /**
+     * 微信精选列表
+     */
+    @GET("wxhot")
+    Observable<WXHttpResponse<List<WXItemBean>>> getWXHotSearch(@Query("num") int num, @Query("page") int page, @Query("word") String word);
+
+
+    /**
+     * 技术文章列表
+     */
+    @GET("data/{tech}/{num}/{page}")
+    Observable<GankHttpResponse<List<GankItemBean>>> getTechList(@Path("tech") String tech, @Path("num") int num, @Path("page") int page);
+
+    /**
+     * 妹纸列表
+     */
+    @GET("data/福利/{num}/{page}")
+    Observable<GankHttpResponse<List<GankItemBean>>> getGirlList(@Path("num") int num, @Path("page") int page);
+
+    /**
+     * 随机妹纸图
+     */
+    @GET("random/data/福利/{num}")
+    Observable<GankHttpResponse<List<GankItemBean>>> getRandomGirl(@Path("num") int num);
+
+    /**
+     * 搜索
+     */
+    @GET("search/query/{query}/category/{type}/count/{count}/page/{page}")
+    Observable<GankHttpResponse<List<GankSearchItemBean>>> getSearchList(@Path("query") String query, @Path("type") String type, @Path("count") int num, @Path("page") int page);
 
 
 }

@@ -191,7 +191,7 @@ public abstract class BaseMenuActivity<T extends BasePresenter, E extends BaseMo
             this.startActivity(intent);
             Logger.e("跳转完成"+"-->"+cls.getSimpleName().toString());
            this.overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
-            finish();
+            //finish();
         }
     }
 }

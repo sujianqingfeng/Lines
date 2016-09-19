@@ -2,6 +2,7 @@ package com.sujian.lines.ui.guide;
 
 import android.content.Intent;
 import android.support.v4.view.ViewPager;
+import android.view.WindowManager;
 
 import com.flyco.banner.anim.select.ZoomInEnter;
 import com.sujian.lines.R;
@@ -34,7 +35,7 @@ public class GuideActivity extends BaseActivity {
     @Override
     public void initView() {
 
-
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
     List<Integer> guideList=new ArrayList<>();
         guideList.add(R.mipmap.guide_01);

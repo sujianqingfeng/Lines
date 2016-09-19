@@ -1,5 +1,6 @@
 package com.sujian.lines.ui.gank.activity;
 
+import android.os.Bundle;
 import android.view.View;
 
 import com.sujian.lines.R;
@@ -7,6 +8,8 @@ import com.sujian.lines.base.BaseViewPagerActivity;
 import com.sujian.lines.base.util.ActivityFragmentInject;
 import com.sujian.lines.ui.gank.android.AndroidFragment;
 import com.sujian.lines.ui.gank.ios.IosFragment;
+import com.sujian.lines.ui.gank.tech.TechFragment;
+import com.sujian.lines.ui.gank.tech.TechPresenter;
 import com.sujian.lines.ui.gank.web.WebFragment;
 import com.sujian.lines.ui.gank.welfare.WelfareFragment;
 
@@ -27,13 +30,23 @@ public class GankActivity extends BaseViewPagerActivity<GankPresenter,GankModel>
     protected void initViewPager() {
         super.initViewPager();
 
-        AndroidFragment androidFragment=new AndroidFragment();
-        IosFragment iosFragment=new IosFragment();
-        WebFragment webFragment=new WebFragment();
+        TechFragment androidFragment = new TechFragment();
+        TechFragment iOSFragment = new TechFragment();
+        TechFragment webFragment = new TechFragment();
+        Bundle androidBundle = new Bundle();
+        androidBundle.putString("tech", TechPresenter.TECH_ANDROID);
+        androidFragment.setArguments(androidBundle);
+        Bundle iosBundle = new Bundle();
+        iosBundle.putString("tech", TechPresenter.TECH_IOS);
+        iOSFragment.setArguments(iosBundle);
+        Bundle webBundle = new Bundle();
+        webBundle.putString("tech", TechPresenter.TECH_WEB);
+        webFragment.setArguments(webBundle);
+
         WelfareFragment welfareFragment=new WelfareFragment();
 
         fragments.add(androidFragment);
-        fragments.add(iosFragment);
+        fragments.add(iOSFragment);
         fragments.add(webFragment);
         fragments.add(welfareFragment);
 

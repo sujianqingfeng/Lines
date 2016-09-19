@@ -7,11 +7,10 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
-
 import com.sujian.lines.R;
 import com.sujian.lines.base.BaseFragment;
 import com.sujian.lines.data.entity.HotListBean;
-import com.sujian.lines.view.layout.LoadingPage;
+import com.sujian.lines.ui.zhihu.detail.ZhihuDetailActivity;
 import com.wang.avi.AVLoadingIndicatorView;
 
 import java.util.ArrayList;
@@ -41,6 +40,24 @@ public class HotFragment extends BaseFragment<HotPresenter,HotModel> implements 
         rvHotContent.setVisibility(View.INVISIBLE);
         rvHotContent.setLayoutManager(new LinearLayoutManager(mContext));
         rvHotContent.setAdapter(mAdapter);
+        swipeRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                mPresenter.showHot();
+            }
+        });
+        mAdapter.setOnItemClickListener(new HotAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(int position, View shareView) {
+                mAdapter.setReadState(position,true);
+                mAdapter.notifyItemChanged(position);
+                Intent intent = new Intent();
+                intent.setClass(mContext, ZhihuDetailActivity.class);
+                intent.putExtra("id",mList.get(position).getNews_id());
+                ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(getActivity(), shareView, "shareView");
+                mContext.startActivity(intent,options.toBundle());
+            }
+        });
     }
 
     @Override

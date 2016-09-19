@@ -20,6 +20,7 @@ import com.mobsandgeeks.saripaar.annotation.Length;
 import com.mobsandgeeks.saripaar.annotation.NotEmpty;
 import com.mobsandgeeks.saripaar.annotation.Order;
 import com.mobsandgeeks.saripaar.annotation.Password;
+import com.orhanobut.logger.Logger;
 import com.sujian.lines.R;
 import com.sujian.lines.base.BaseActivity;
 import com.sujian.lines.base.util.NetWorkUtil;
@@ -76,10 +77,12 @@ public class LoginActivity extends BaseActivity<LoginPresenter,LoginModel> imple
         getWindow().setExitTransition(null);
         getWindow().setEnterTransition(null);
 
+        Logger.e("------------"+fab_login.getTransitionName());
+
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             ActivityOptions options =
-                    ActivityOptions.makeSceneTransitionAnimation(this, fab_login, fab_login.getTransitionName());
-            startActivity(new Intent(this, RegisterActivity.class), options.toBundle());
+                    ActivityOptions.makeSceneTransitionAnimation(mContext, fab_login, fab_login.getTransitionName());
+            startActivity(new Intent(mContext, RegisterActivity.class), options.toBundle());
         } else {
             startActivity(new Intent(this, RegisterActivity.class));
         }

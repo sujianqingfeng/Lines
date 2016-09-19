@@ -7,7 +7,10 @@ import android.view.View;
 import com.sujian.lines.R;
 import com.sujian.lines.base.BaseActivity;
 import com.sujian.lines.base.BaseMenuActivity;
+import com.sujian.lines.base.BaseViewPagerActivity;
 import com.sujian.lines.base.util.ActivityFragmentInject;
+import com.sujian.lines.ui.wechat.fragment.WeChatFragment;
+import com.sujian.lines.ui.zhihu.daily.DailyFragment;
 
 import butterknife.Bind;
 
@@ -16,12 +19,9 @@ import butterknife.Bind;
  * Mail:121116111@qq.com
  */
 @ActivityFragmentInject(menuDefaultCheckedItem = R.id.drawer_wechat,toolbarTitle = R.string.wechat)
-public class WeChatActivity extends BaseMenuActivity<WeChatPresenter,WeChatModel> implements WeChatContract.View{
+public class WeChatActivity extends BaseViewPagerActivity<WeChatPresenter,WeChatModel> implements WeChatContract.View{
 
-    @Bind(R.id.tablayout)
-    TabLayout tablayout;
-    @Bind(R.id.viewpager)
-    ViewPager viewPager;
+
 
     @Override
     public int getLayoutId() {
@@ -29,9 +29,17 @@ public class WeChatActivity extends BaseMenuActivity<WeChatPresenter,WeChatModel
     }
 
     @Override
+    protected void initViewPager() {
+        super.initViewPager();
+        WeChatFragment weChatFragment=new WeChatFragment();
+        fragments.add(weChatFragment);
+        titles.add("微信");
+        baseFragmentPagerAdapter.notifyDataSetChanged();
+    }
+
+    @Override
     public void initView() {
         super.initView();
-        tablayout.setVisibility(View.GONE);
-        viewPager.setVisibility(View.GONE);
+        tabLayout.setVisibility(View.GONE);
     }
 }

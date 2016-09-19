@@ -9,6 +9,7 @@ import android.support.v7.widget.RecyclerView;
 import com.sujian.lines.R;
 import com.sujian.lines.base.BaseFragment;
 import com.sujian.lines.data.entity.ThemeListBean;
+import com.sujian.lines.ui.zhihu.theme.activity.ThemeActivity;
 import com.sujian.lines.view.layout.LoadingPage;
 import com.wang.avi.AVLoadingIndicatorView;
 
@@ -37,6 +38,22 @@ public class ThemeFragment extends BaseFragment<ThemePresenter,ThemeModel> imple
         mAdapter = new ThemeAdapter(mContext, mList);
         rvThemeList.setLayoutManager(new GridLayoutManager(mContext, 2));
         rvThemeList.setAdapter(mAdapter);
+
+        mAdapter.setOnItemClickListener(new ThemeAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(int id) {
+                Intent intent = new Intent();
+                intent.setClass(mContext, ThemeActivity.class);
+                intent.putExtra("id", id);
+                mContext.startActivity(intent);
+            }
+        });
+        swipeRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                mPresenter.getTheme();
+            }
+        });
     }
 
     @Override

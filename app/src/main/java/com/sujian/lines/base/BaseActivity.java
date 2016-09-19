@@ -1,5 +1,6 @@
 package com.sujian.lines.base;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
@@ -29,7 +30,7 @@ public abstract class BaseActivity<T extends BasePresenter, E extends BaseModel>
     public boolean isNight;
     public T mPresenter;
     public E mModel;
-    public Context mContext;
+    public Activity mContext;
 
     private SwipeBackLayout swipeBackLayout;
     private ImageView ivShadow;

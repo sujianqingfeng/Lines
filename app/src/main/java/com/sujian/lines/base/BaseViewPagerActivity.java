@@ -19,11 +19,10 @@ public abstract class BaseViewPagerActivity<T extends BasePresenter, E extends B
 
     //viewpager
     @Bind(R.id.viewpager)
-    protected
-    ViewPager viewpager;
+    protected ViewPager viewpager;
     //tablayout
     @Bind(R.id.tablayout)
-    TabLayout tabLayout;
+     protected TabLayout tabLayout;
 
     //装载fragment
     protected List<BaseFragment> fragments;

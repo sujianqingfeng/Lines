@@ -30,9 +30,11 @@
         <activity
             android:name=".ui.login.LoginActivity"
             android:windowSoftInputMode="adjustResize" />
+
         <activity
             android:name=".ui.register.RegisterActivity"
             android:windowSoftInputMode="adjustResize" />
+
         <activity android:name=".ui.user.UserActivity" />
         <activity android:name=".ui.wechat.WeChatActivity" />
         <activity
@@ -48,7 +50,10 @@
         <activity android:name=".ui.about.AboutMeActivity" />
         <activity android:name=".ui.zhihu.detail.ZhihuDetailActivity" />
         <activity android:name=".ui.zhihu.section.activity.SectionActivity" />
-        <activity android:name=".ui.zhihu.comment.CommentActivity"></activity>
+        <activity android:name=".ui.zhihu.comment.CommentActivity" />
+        <activity android:name=".ui.zhihu.theme.activity.ThemeActivity" />
+        <activity android:name=".ui.wechat.detail.TechDetailActivity"/>
+        <activity android:name=".ui.gank.detail.GirlDetailActivity"/>
     </application>
 
 </manifest>

@@ -1,7 +1,9 @@
 package com.sujian.lines;
 
+import java.io.File;
+
 /**
- * Created by baixiaokang on 16/4/23.
+ * 常量类
  */
 public class C {
 
@@ -40,6 +42,13 @@ public class C {
 
     public static final String SP_LIKE_POINT = "like_point";
 
+    //================= KEY ====================
+
+    public static final String BAIDU_KEY="0857263486f4bb2376f5a37002b48bc4";
+
+    //================= PATH ====================
+
+    public static final String PATH_DATA = App.getAppContext().getCacheDir().getAbsolutePath() + File.separator + "data";
 
 
     //base
