@@ -2,11 +2,9 @@ package com.sujian.lines.ui.home;
 
 import android.annotation.TargetApi;
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Build;
-import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.ActivityOptionsCompat;
@@ -14,22 +12,16 @@ import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.widget.CalendarView;
 import android.widget.DatePicker;
-import android.widget.ImageView;
-import android.widget.TextView;
 
-import com.afollestad.materialdialogs.DialogAction;
-import com.afollestad.materialdialogs.MaterialDialog;
+
 import com.orhanobut.logger.Logger;
 import com.sujian.lines.C;
 import com.sujian.lines.R;
 import com.sujian.lines.base.BaseViewPagerActivity;
-import com.sujian.lines.base.RxBus;
 import com.sujian.lines.base.RxManager;
 import com.sujian.lines.base.util.ActivityFragmentInject;
 import com.sujian.lines.base.util.ImageUtil;
-import com.sujian.lines.base.util.ToastUtil;
 import com.sujian.lines.data.entity._User;
 import com.sujian.lines.data.event.TimeEvent;
 import com.sujian.lines.ui.user.UserActivity;
@@ -63,7 +55,6 @@ public class HomeActivity extends BaseViewPagerActivity<HomePresenter,HomeModel>
     @Override
     public void initView() {
         super.initView();
-
         mPresenter.showTabs();
         mPresenter.getUserInfo();
 

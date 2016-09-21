@@ -17,12 +17,7 @@ import butterknife.Bind;
  */
 public abstract class BaseViewPagerActivity<T extends BasePresenter, E extends BaseModel> extends BaseMenuActivity<T,E>{
 
-    //viewpager
-    @Bind(R.id.viewpager)
-    protected ViewPager viewpager;
-    //tablayout
-    @Bind(R.id.tablayout)
-     protected TabLayout tabLayout;
+
 
     //装载fragment
     protected List<BaseFragment> fragments;

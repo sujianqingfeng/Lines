@@ -16,7 +16,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 
-public class App extends Application {
+public class App extends Application  {
     private static App mApp;
     private Set<Activity> allActivities;
     public static int SCREEN_WIDTH = -1;
@@ -32,12 +32,10 @@ public class App extends Application {
         getScreenSize();
         SpUtil.init(this);
         //初始化log
-        Logger
-                .init("SuJian Lines") // default PRETTYLOGGER or use just init()
-                .methodCount(0)                 // default 2
-                //.hideThreadInfo()               // default shown
-                .logLevel(LogLevel.FULL)        // default LogLevel.FULL
-                .methodOffset(2)  ;              // default 0
+        Logger.init("SuJian Lines")
+                .methodCount(0)
+                .logLevel(LogLevel.FULL)
+                .methodOffset(2)  ;
 
     }
 
@@ -64,6 +62,7 @@ public class App extends Application {
 
 
 
+    //初始化屏幕
     public void getScreenSize() {
         WindowManager windowManager = (WindowManager)this.getSystemService(Context.WINDOW_SERVICE);
         DisplayMetrics dm = new DisplayMetrics();

@@ -10,23 +10,11 @@
         <item name="android:windowTranslucentStatus" tools:targetApi="kitkat">true</item>
 
 
+        <item name="colorPrimary">@color/theme_color_primary</item>
+        <item name="colorPrimaryDark">@color/theme_color_primary</item>
+        <item name="colorAccent">@color/theme_color_primary_trans</item>
     </style>
 
-    <!-- Base application theme. -->
-    <style name="AppThemeDay" parent="AppTheme">
-        <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimary</item>
-        <item name="colorAccent">@color/colorAccent</item>
-    </style>
-
-
-    <style name="AppThemeNight" parent="AppTheme">
-        <!-- Customize your theme here. -->
-        <item name="colorPrimary">#E91E63</item>
-        <item name="colorPrimaryDark">#E91E63</item>
-        <item name="colorAccent">@color/colorPrimary</item>
-    </style>
 
 
     <style name="AppTheme.NoActionBar">

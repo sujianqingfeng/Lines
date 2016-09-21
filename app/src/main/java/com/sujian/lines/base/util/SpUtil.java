@@ -1,10 +1,13 @@
 package com.sujian.lines.base.util;
 
+import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
 import com.google.gson.Gson;
+import com.orhanobut.logger.Logger;
 import com.sujian.lines.C;
 import com.sujian.lines.base.BaseActivity;
 import com.sujian.lines.data.entity._User;
@@ -31,10 +34,15 @@ public class SpUtil {
         return prefs.getBoolean("isNight", false);
     }
 
+    @SuppressLint("CommitPrefEdits")
     public static void setNight(Context context, boolean isNight) {
         prefs.edit().putBoolean("isNight", isNight).commit();
-        if (context instanceof BaseActivity)
-            ((BaseActivity) context).reload();
+        if (context instanceof BaseActivity) {
+            BaseActivity activity=(BaseActivity) context;
+            activity.useNightMode(isNight);
+            Logger.e("切换日间夜间主题"+isNight);
+        }
+
     }
 
     public static _User getUser() {

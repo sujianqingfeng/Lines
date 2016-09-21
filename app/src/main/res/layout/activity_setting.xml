@@ -7,20 +7,20 @@
     android:layout_height="match_parent">
 
         <android.support.design.widget.AppBarLayout
-            android:id="@+id/appbar_web"
+            android:id="@+id/appbar_setting"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
             <android.support.v7.widget.Toolbar
-                android:id="@+id/tb_web"
+                android:id="@+id/tb_setting"
+                android:navigationIcon="@mipmap/ic_keyboard_backspace_white_36dp"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
                 android:minHeight="?attr/actionBarSize"
                 app:layout_scrollFlags="scroll|enterAlways"
                 app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-                app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-                app:title="@string/app_name" />
+                app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar" />
         </android.support.design.widget.AppBarLayout>
 
         <android.support.v4.widget.NestedScrollView
@@ -68,13 +68,14 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="12dp"
                                 android:text="@string/setting_cache"/>
-                            <android.support.v7.widget.AppCompatCheckBox
-                                android:id="@+id/cb_setting_cache"
-                                android:button="@drawable/abc_btn_check_material"
-                                android:buttonTint="@color/colorAccent"
+
+                            <android.support.v7.widget.SwitchCompat
+                                android:id="@+id/sc_cache"
                                 android:checked="true"
+                                android:buttonTint="@color/colorAccent"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content" />
+
                         </LinearLayout>
                         <include layout="@layout/view_line_05"/>
                         <LinearLayout
@@ -93,9 +94,9 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="12dp"
                                 android:text="@string/setting_image"/>
-                            <android.support.v7.widget.AppCompatCheckBox
-                                android:id="@+id/cb_setting_image"
-                                android:button="@drawable/abc_btn_check_material"
+
+                            <android.support.v7.widget.SwitchCompat
+                                android:id="@+id/sc_setting_image"
                                 android:buttonTint="@color/colorAccent"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content" />
@@ -117,9 +118,9 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="12dp"
                                 android:text="@string/setting_night"/>
-                            <android.support.v7.widget.AppCompatCheckBox
-                                android:id="@+id/cb_setting_night"
-                                android:button="@drawable/abc_btn_check_material"
+
+                            <android.support.v7.widget.SwitchCompat
+                                android:id="@+id/sc_setting_night"
                                 android:buttonTint="@color/colorAccent"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content" />

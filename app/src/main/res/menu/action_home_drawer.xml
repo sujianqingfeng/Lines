@@ -34,6 +34,7 @@
                 android:checkable="true"
                 android:title="@string/drawer_setting"/>
 
+
             <item
                 android:id="@+id/drawer_toggle"
                 android:icon="@mipmap/ic_drawer_toggle"

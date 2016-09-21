@@ -7,6 +7,7 @@ import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.app.AppCompatDelegate;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -38,8 +39,7 @@ public abstract class BaseActivity<T extends BasePresenter, E extends BaseModel>
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        isNight = SpUtil.isNight();
-        setTheme(isNight ? R.style.AppThemeNight : R.style.AppThemeDay);
+
         this.setContentView(this.getLayoutId());
         ButterKnife.bind(this);
         mContext = this;
@@ -68,17 +68,16 @@ public abstract class BaseActivity<T extends BasePresenter, E extends BaseModel>
     @Override
     protected void onResume() {
         super.onResume();
-        if (isNight != SpUtil.isNight()) reload();
+        if (SpUtil.isNight()){
+            AppCompatDelegate.setDefaultNightMode(
+                    AppCompatDelegate.MODE_NIGHT_YES);
+        }else {
+            AppCompatDelegate.setDefaultNightMode(
+                    AppCompatDelegate.MODE_NIGHT_NO);
+        }
     }
 
-    public void reload() {
-        Intent intent = getIntent();
-        overridePendingTransition(0, 0);
-        intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-        finish();
-        overridePendingTransition(0, 0);
-        startActivity(intent);
-    }
+
 
     @Override
     public void setContentView(int layoutResID) {
@@ -120,13 +119,24 @@ public abstract class BaseActivity<T extends BasePresenter, E extends BaseModel>
         });
     }
 
+    public void useNightMode(boolean isNight) {
+        if (isNight) {
+            AppCompatDelegate.setDefaultNightMode(
+                    AppCompatDelegate.MODE_NIGHT_YES);
+        } else {
+            AppCompatDelegate.setDefaultNightMode(
+                    AppCompatDelegate.MODE_NIGHT_NO);
+        }
+        recreate();
+    }
+
 
     public abstract int getLayoutId();
 
     public abstract void initView();
 
     /**
-     * 半透明状态栏
+     * 透明状态栏
      */
     public void initWindow() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {

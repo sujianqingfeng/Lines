@@ -53,4 +53,11 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="color_palette">颜色</string>
+    <string name="colors">颜色深度</string>
+    <string name="custom">定制</string>
+    <string name="cancel">取消</string>
+    <string name="preset">之前</string>
+    <string name="done">确定</string>
+    <string name="back">返回</string>
 </resources>

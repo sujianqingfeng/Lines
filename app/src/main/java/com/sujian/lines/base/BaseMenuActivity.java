@@ -1,12 +1,12 @@
 package com.sujian.lines.base;
 
 import android.content.Intent;
-import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
+import android.support.design.widget.TabLayout;
 import android.support.v4.view.GravityCompat;
+import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
 import android.view.Gravity;
@@ -36,14 +36,21 @@ import butterknife.Bind;
  * Created by sujian on 2016/9/13.
  * Mail:121116111@qq.com
  */
-public abstract class BaseMenuActivity<T extends BasePresenter, E extends BaseModel> extends BaseActivity<T,E> {
+public abstract class BaseMenuActivity<T extends BasePresenter, E extends BaseModel> extends BaseActivity<T, E> {
 
     @Bind(R.id.dl_main)
     DrawerLayout dl_main;
     @Bind(R.id.nv_menu)
     protected NavigationView nv_menu;
     @Bind(R.id.main_toorbar)
-     protected Toolbar main_toorbar;
+    protected Toolbar main_toorbar;
+
+    //viewpager
+    @Bind(R.id.viewpager)
+    protected ViewPager viewpager;
+    //tablayout
+    @Bind(R.id.tablayout)
+    protected TabLayout tabLayout;
 
     protected int mMenuDefaultCheckedItem;
     protected int mToolbarTitle;
@@ -52,7 +59,6 @@ public abstract class BaseMenuActivity<T extends BasePresenter, E extends BaseMo
 
     @Override
     public abstract int getLayoutId();
-
 
 
     @Override
@@ -87,7 +93,8 @@ public abstract class BaseMenuActivity<T extends BasePresenter, E extends BaseMo
                         }
                     })
                     .show();
-        };
+        }
+        ;
     }
 
     @Override
@@ -117,7 +124,6 @@ public abstract class BaseMenuActivity<T extends BasePresenter, E extends BaseMo
      * 初始化toolbar
      */
     private void initToolBar() {
-
 
         setSupportActionBar(main_toorbar);
 
@@ -156,18 +162,18 @@ public abstract class BaseMenuActivity<T extends BasePresenter, E extends BaseMo
                         break;
 
                     case R.id.drawer_like:
-                        mClass= LikeActivity.class;
+                        mClass = LikeActivity.class;
                         break;
 
                     case R.id.drawer_setting:
-                        mClass= SettingActivity.class;
+                        mClass = SettingActivity.class;
                         break;
 
                     case R.id.drawer_about:
                         mClass = AboutMeActivity.class;
                         break;
                     case R.id.drawer_toggle:
-                        SpUtil.setNight(mContext,!SpUtil.isNight());
+                        SpUtil.setNight(mContext, !SpUtil.isNight());
                         break;
                 }
                 dl_main.closeDrawers();
@@ -189,8 +195,8 @@ public abstract class BaseMenuActivity<T extends BasePresenter, E extends BaseMo
             //如果要启动的flags 已经finsh  不能启动
             //intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
             this.startActivity(intent);
-            Logger.e("跳转完成"+"-->"+cls.getSimpleName().toString());
-           this.overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+            Logger.e("跳转完成" + "-->" + cls.getSimpleName().toString());
+            this.overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
             //finish();
         }
     }
