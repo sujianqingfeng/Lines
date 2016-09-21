@@ -1,6 +1,6 @@
 package com.sujian.lines.ui.zhihu.section;
 
-import com.sujian.lines.api.ZhiHuApi;
+import com.sujian.lines.api.Api;
 import com.sujian.lines.base.util.helper.RxSchedulers;
 import com.sujian.lines.data.entity.SectionListBean;
 
@@ -13,8 +13,9 @@ import rx.Observable;
 public class SectionModel implements SectionContract.Model {
     @Override
     public Observable<SectionListBean> getSectionList() {
-        return ZhiHuApi.getInstance()
-                .service.getSectionList()
+        return Api.getInstance()
+                .getZhihuApiService()
+                .getSectionList()
                 .compose(RxSchedulers.io_main());
     }
 }

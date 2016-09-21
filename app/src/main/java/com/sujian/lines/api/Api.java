@@ -6,6 +6,7 @@ import android.util.Log;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.sujian.lines.App;
+import com.sujian.lines.C;
 import com.sujian.lines.base.util.NetWorkUtil;
 
 import java.io.File;
@@ -24,56 +25,133 @@ import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
- * Created by baixiaokang on 16/3/9.
+ * 获取apiservice
  */
 public class Api {
 
-
-    public static final String BASE_URL = "https://leancloud.cn:443/1.1/";
-    public static final String X_LC_Id = "t6AeDTpmn32eDWInYGbafqoi-gzGzoHsz";
-    public static final String X_LC_Key = "eKOuGRhDME8tx4QiCjDyN1tM";
-
     public static final int DEFAULT_TIMEOUT = 5;
 
-    public Retrofit retrofit;
-    public ApiService service;
+    //拦截日志
+    private  HttpLoggingInterceptor interceptor;
+    //缓存
+    private  Cache cache;
 
-    Interceptor mInterceptor = (chain) -> chain.proceed(chain.request().newBuilder()
-            .addHeader("X-LC-Id", X_LC_Id)
-            .addHeader("X-LC-Key", X_LC_Key)
-            .addHeader("Content-Type", "application/json")
-            .build());
+    private  Gson gson;
+
 
     //构造方法私有
     private Api() {
-        HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
+        interceptor = new HttpLoggingInterceptor();
         interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
 
         File cacheFile = new File(App.getAppContext().getCacheDir(), "cache");
-        Cache cache = new Cache(cacheFile, 1024 * 1024 * 100); //100Mb
+        cache = new Cache(cacheFile, 1024 * 1024 * 100); //100Mb
+
+        gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ssZ").serializeNulls().create();
+
+    }
+
+
+    public  ApiService getLeanCloundApiService() {
+        String BASE_URL = "https://leancloud.cn:443/1.1/";
+        String X_LC_Id = "t6AeDTpmn32eDWInYGbafqoi-gzGzoHsz";
+        String X_LC_Key = "eKOuGRhDME8tx4QiCjDyN1tM";
+        Interceptor mInterceptor = (chain) -> chain.proceed(chain.request().newBuilder()
+                .addHeader("X-LC-Id", X_LC_Id)
+                .addHeader("X-LC-Key", X_LC_Key)
+                .addHeader("Content-Type", "application/json")
+                .build());
+
 
         OkHttpClient okHttpClient = new OkHttpClient.Builder()
                 .readTimeout(7676, TimeUnit.MILLISECONDS)
                 .connectTimeout(7676, TimeUnit.MILLISECONDS)
                 .addInterceptor(mInterceptor)
                 .addInterceptor(interceptor)
-                .cookieJar(new CookieManger(App.getAppContext()))
-                .addNetworkInterceptor(new HttpCacheInterceptor())
+                .addInterceptor(getInterceptor())
+                .addNetworkInterceptor(getNetWorkInterceptor())
                 .cache(cache)
                 .build();
 
 
-        Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ssZ").serializeNulls().create();
-
-        retrofit = new Retrofit.Builder()
+        return new Retrofit.Builder()
                 .client(okHttpClient)
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                 .baseUrl(BASE_URL)
-                .build();
-        service = retrofit.create(ApiService.class);
+                .build()
+                .create(ApiService.class);
+
     }
 
+    public  ApiService getZhihuApiService() {
+        String BASE_URL = "http://news-at.zhihu.com/api/4/";
+        OkHttpClient okHttpClient = new OkHttpClient.Builder()
+                .readTimeout(7676, TimeUnit.MILLISECONDS)
+                .connectTimeout(7676, TimeUnit.MILLISECONDS)
+                .addInterceptor(interceptor)
+                .addInterceptor(getInterceptor())
+                .addNetworkInterceptor(getNetWorkInterceptor())
+                .cache(cache)
+                .build();
+
+
+        return new Retrofit.Builder()
+                .client(okHttpClient)
+                .addConverterFactory(GsonConverterFactory.create(gson))
+                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
+                .baseUrl(BASE_URL)
+                .build()
+                .create(ApiService.class);
+    }
+
+    public  ApiService getWeChatApiService() {
+        String BASE_URL = "http://apis.baidu.com/txapi/weixin/";
+        Interceptor mInterceptor = (chain) -> chain.proceed(chain.request().newBuilder()
+                .addHeader("apikey", C.BAIDU_KEY)
+                .addHeader("Content-Type", "application/json")
+                .build());
+
+        OkHttpClient okHttpClient = new OkHttpClient.Builder()
+                .readTimeout(7676, TimeUnit.MILLISECONDS)
+                .connectTimeout(7676, TimeUnit.MILLISECONDS)
+                .addInterceptor(mInterceptor)
+                .addInterceptor(interceptor)
+                .addInterceptor(getInterceptor())
+                .addNetworkInterceptor(getNetWorkInterceptor())
+                .cache(cache)
+                .build();
+
+
+        return new Retrofit.Builder()
+                .client(okHttpClient)
+                .addConverterFactory(GsonConverterFactory.create(gson))
+                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
+                .baseUrl(BASE_URL)
+                .build()
+                .create(ApiService.class);
+    }
+
+    public  ApiService getGankApiService() {
+        String BASE_URL = "http://gank.io/api/";
+        OkHttpClient okHttpClient = new OkHttpClient.Builder()
+                .readTimeout(7676, TimeUnit.MILLISECONDS)
+                .connectTimeout(7676, TimeUnit.MILLISECONDS)
+                .addInterceptor(interceptor)
+                .addInterceptor(getInterceptor())
+                .addNetworkInterceptor(getNetWorkInterceptor())
+                .cache(cache)
+                .build();
+
+
+        return new Retrofit.Builder()
+                .client(okHttpClient)
+                .addConverterFactory(GsonConverterFactory.create(gson))
+                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
+                .baseUrl(BASE_URL)
+                .build()
+                .create(ApiService.class);
+    }
 
 
     //在访问HttpMethods时创建单例
@@ -87,32 +165,53 @@ public class Api {
     }
 
 
-    class HttpCacheInterceptor implements Interceptor {
-
-        @Override
-        public Response intercept(Chain chain) throws IOException {
-            Request request = chain.request();
-            if (!NetWorkUtil.isNetConnected(App.getAppContext())) {
-                request = request.newBuilder()
-                        .cacheControl(CacheControl.FORCE_CACHE)
-                        .build();
-                Log.d("Okhttp", "no network");
+    /**
+     * 设置返回数据的  Interceptor  判断网络   没网读取缓存
+     */
+    public Interceptor getInterceptor() {
+        return new Interceptor() {
+            @Override
+            public Response intercept(Chain chain) throws IOException {
+                Request request = chain.request();
+                if (!NetWorkUtil.isNetConnected(App.getAppContext())) {
+                    request = request.newBuilder()
+                            .cacheControl(CacheControl.FORCE_CACHE)
+                            .build();
+                }
+                return chain.proceed(request);
             }
-
-            Response originalResponse = chain.proceed(request);
-            if (NetWorkUtil.isNetConnected(App.getAppContext())) {
-                //有网的时候读接口上的@Headers里的配置，你可以在这里进行统一的设置
-                String cacheControl = request.cacheControl().toString();
-                return originalResponse.newBuilder()
-                        .header("Cache-Control", cacheControl)
-                        .removeHeader("Pragma")
-                        .build();
-            } else {
-                return originalResponse.newBuilder()
-                        .header("Cache-Control", "public, only-if-cached, max-stale=2419200")
-                        .removeHeader("Pragma")
-                        .build();
-            }
-        }
+        };
     }
+
+
+    /**
+     * 设置连接器  设置缓存
+     */
+    public Interceptor getNetWorkInterceptor() {
+        return new Interceptor() {
+            @Override
+            public Response intercept(Chain chain) throws IOException {
+                Request request = chain.request();
+                Response response = chain.proceed(request);
+                if (NetWorkUtil.isNetConnected(App.getAppContext())) {
+                    int maxAge = 0 * 60;
+                    // 有网络时 设置缓存超时时间0个小时
+                    response.newBuilder()
+                            .header("Cache-Control", "public, max-age=" + maxAge)
+                            .removeHeader("Pragma")
+                            .build();
+                } else {
+                    // 无网络时，设置超时为1周
+                    int maxStale = 60 * 60 * 24 * 7;
+                    response.newBuilder()
+                            .header("Cache-Control", "public, only-if-cached, max-stale=" + maxStale)
+                            .removeHeader("Pragma")
+                            .build();
+                }
+                return response;
+            }
+        };
+    }
+
+
 }

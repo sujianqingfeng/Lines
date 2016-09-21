@@ -35,14 +35,15 @@ public class UserModel implements UserContract.Model {
     @Override
     public Observable<CreatedResult> upFile(File file) {
         return Api.getInstance()
-                .service
+                .getLeanCloundApiService()
                 .upFile(file.getName(), RequestBody.create(MediaType.parse("image/*"), file))
                 .compose(RxSchedulers.io_main());
     }
 
     @Override
     public Observable upUser(_User user) {
-        return Api.getInstance().service
+        return Api.getInstance()
+                .getLeanCloundApiService()
                 .upUser(user.getSessionToken(), user.objectId, new Face(user.getFace()))
                 .compose(RxSchedulers.io_main());
     }

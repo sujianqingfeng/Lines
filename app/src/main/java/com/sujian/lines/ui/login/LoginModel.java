@@ -18,7 +18,7 @@ public class LoginModel implements LoginContract.Model {
     public Observable<_User> login(String userName, String userPassword) {
 
         return Api.getInstance()
-                .service
+                .getLeanCloundApiService()
                 .login(userName,userPassword)
                 .compose(RxSchedulers.io_main());
 

@@ -1,6 +1,6 @@
 package com.sujian.lines.ui.gank.welfare;
 
-import com.sujian.lines.api.GankApi;
+import com.sujian.lines.api.Api;
 import com.sujian.lines.base.util.helper.RxSchedulers;
 import com.sujian.lines.data.entity.GankItemBean;
 
@@ -15,8 +15,8 @@ import rx.Observable;
 public class WelfareModel implements WelfareContract.Model {
     @Override
     public Observable<List<GankItemBean>> getGirlList(int num, int page) {
-        return GankApi.getInstance()
-                .service
+        return Api.getInstance()
+                .getGankApiService()
                 .getGirlList(num, page)
                 .compose(RxSchedulers.io_main())
                 .compose(RxSchedulers.handleResult());

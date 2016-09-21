@@ -15,7 +15,7 @@ public class RegisterModel implements RegisterContract.Model {
     @Override
     public Observable<CreatedResult> sign(String userName, String userPassword) {
         return Api.getInstance()
-                .service
+                .getLeanCloundApiService()
                 .createUser(new _User(userName,userPassword))
                 .compose(RxSchedulers.io_main());
     }

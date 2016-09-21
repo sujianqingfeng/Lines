@@ -1,6 +1,6 @@
 package com.sujian.lines.ui.zhihu.daily;
 
-import com.sujian.lines.api.ZhiHuApi;
+import com.sujian.lines.api.Api;
 import com.sujian.lines.base.util.DateUtil;
 import com.sujian.lines.base.util.helper.RxSchedulers;
 import com.sujian.lines.data.entity.DailyBeforeListBean;
@@ -18,8 +18,8 @@ import rx.schedulers.Schedulers;
 public class DailyModel implements DailyContract.Model {
     @Override
     public Observable<DailyListBean> getDailyData() {
-        return ZhiHuApi.getInstance()
-                .service
+        return Api.getInstance()
+                .getZhihuApiService()
                 .getDailyList()
                 .compose(RxSchedulers.io_main());
     }
@@ -55,8 +55,8 @@ public class DailyModel implements DailyContract.Model {
                 .flatMap(new Func1<String, Observable<DailyBeforeListBean>>() {
                     @Override
                     public Observable<DailyBeforeListBean> call(String s) {
-                        return ZhiHuApi.getInstance()
-                                .service
+                        return Api.getInstance()
+                                .getZhihuApiService()
                                 .getDailyBeforeList(s);
                     }
                 })

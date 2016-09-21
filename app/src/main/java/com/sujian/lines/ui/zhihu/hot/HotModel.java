@@ -1,6 +1,6 @@
 package com.sujian.lines.ui.zhihu.hot;
 
-import com.sujian.lines.api.ZhiHuApi;
+import com.sujian.lines.api.Api;
 import com.sujian.lines.base.util.helper.RxSchedulers;
 import com.sujian.lines.data.entity.HotListBean;
 
@@ -13,8 +13,8 @@ import rx.Observable;
 public class HotModel implements HotContract.Model {
     @Override
     public Observable<HotListBean> getHot() {
-        return ZhiHuApi.getInstance()
-                .service
+        return Api.getInstance()
+                .getZhihuApiService()
                 .getHotList()
                 .compose(RxSchedulers.io_main());
     }

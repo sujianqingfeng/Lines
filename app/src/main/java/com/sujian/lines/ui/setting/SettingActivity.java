@@ -23,9 +23,9 @@ public class SettingActivity extends BaseActivity<SettingPresenter,SettingModel>
 
     @Bind(R.id.sc_cache)
     SwitchCompat scSettingCache;
-    @Bind(R.id.cb_setting_image)
+    @Bind(R.id.sc_setting_image)
     SwitchCompat scSettingImage;
-    @Bind(R.id.cb_setting_night)
+    @Bind(R.id.sc_setting_night)
     SwitchCompat scSettingNight;
     @Bind(R.id.ll_setting_feedback)
     LinearLayout llSettingFeedback;

@@ -1,6 +1,6 @@
 package com.sujian.lines.ui.zhihu.theme;
 
-import com.sujian.lines.api.ZhiHuApi;
+import com.sujian.lines.api.Api;
 import com.sujian.lines.base.util.helper.RxSchedulers;
 import com.sujian.lines.data.entity.ThemeListBean;
 
@@ -13,8 +13,8 @@ import rx.Observable;
 public class ThemeModel implements ThemeContract.Model {
     @Override
     public Observable<ThemeListBean> getTheme() {
-        return ZhiHuApi.getInstance()
-                .service
+        return Api.getInstance()
+                .getZhihuApiService()
                 .getThemeList()
                 .compose(RxSchedulers.io_main());
     }

@@ -1,6 +1,6 @@
 package com.sujian.lines.ui.zhihu.detail;
 
-import com.sujian.lines.api.ZhiHuApi;
+import com.sujian.lines.api.Api;
 import com.sujian.lines.base.util.helper.RxSchedulers;
 import com.sujian.lines.data.entity.DetailExtraBean;
 import com.sujian.lines.data.entity.ZhihuDetailBean;
@@ -14,16 +14,16 @@ import rx.Observable;
 public class ZhihuDetailModel implements ZhihuDetailContract.Model {
     @Override
     public Observable<ZhihuDetailBean> getDetailData(int id) {
-        return ZhiHuApi.getInstance()
-                .service
+        return Api.getInstance()
+                .getZhihuApiService()
                 .getDetailInfo(id)
                 .compose(RxSchedulers.io_main());
     }
 
     @Override
     public Observable<DetailExtraBean> getExtraData(int id) {
-        return ZhiHuApi.getInstance()
-                .service
+        return Api.getInstance()
+                .getZhihuApiService()
                 .getDetailExtraInfo(id)
                 .compose(RxSchedulers.io_main());
     }

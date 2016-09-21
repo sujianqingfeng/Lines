@@ -1,6 +1,6 @@
 package com.sujian.lines.ui.gank.tech;
 
-import com.sujian.lines.api.GankApi;
+import com.sujian.lines.api.Api;
 import com.sujian.lines.base.util.helper.RxSchedulers;
 import com.sujian.lines.data.entity.GankItemBean;
 
@@ -15,8 +15,8 @@ import rx.Observable;
 public class TechModel implements TechContract.Model {
     @Override
     public Observable<List<GankItemBean>> getGankData(String tech, int num, int page) {
-        return GankApi.getInstance()
-                .service
+        return Api.getInstance()
+                .getGankApiService()
                 .getTechList(tech,num,page)
                 .compose(RxSchedulers.io_main())
                 .compose(RxSchedulers.handleResult());
@@ -24,8 +24,8 @@ public class TechModel implements TechContract.Model {
 
     @Override
     public Observable<List<GankItemBean>> getRandomGirl(int num) {
-        return GankApi.getInstance()
-                .service
+        return Api.getInstance()
+                .getGankApiService()
                 .getRandomGirl(num)
                 .compose(RxSchedulers.io_main())
                 .compose(RxSchedulers.handleResult());

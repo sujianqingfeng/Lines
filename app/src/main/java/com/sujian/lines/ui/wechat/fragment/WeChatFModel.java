@@ -1,6 +1,6 @@
 package com.sujian.lines.ui.wechat.fragment;
 
-import com.sujian.lines.api.WeChatApi;
+import com.sujian.lines.api.Api;
 import com.sujian.lines.base.util.helper.RxSchedulers;
 import com.sujian.lines.data.entity.WXItemBean;
 
@@ -15,8 +15,8 @@ import rx.Observable;
 public class WeChatFModel implements WeChatFContract.Model {
     @Override
     public Observable<List<WXItemBean>> getWechatData(int num, int page) {
-        return WeChatApi.getInstance()
-                .service
+        return Api.getInstance()
+                .getWeChatApiService()
                 .getWXHot(num,page)
                 .compose(RxSchedulers.io_main())
                 .compose(RxSchedulers.handleWXResult());
