@@ -6,14 +6,19 @@ android {
 
     defaultConfig {
         applicationId "com.sujian.lines"
-        minSdkVersion 21
+        minSdkVersion 19
         targetSdkVersion 24
         versionCode 1
         versionName "1.0"
     }
     buildTypes {
         release {
-            minifyEnabled false
+             //混淆开关
+                    minifyEnabled false
+            //Zipalign优化
+                    zipAlignEnabled true
+              // 移除无用的resource文件
+                    shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }

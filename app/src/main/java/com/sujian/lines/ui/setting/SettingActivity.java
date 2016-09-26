@@ -47,18 +47,7 @@ public class SettingActivity extends BaseActivity<SettingPresenter,SettingModel>
     public void initView() {
 
 
-
-
-
-
-
-
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                finish();
-            }
-        });
+        setToolBar(toolbar,"设置");
     }
 
 

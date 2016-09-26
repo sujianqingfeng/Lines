@@ -1,6 +1,7 @@
 package com.sujian.lines.api;
 
 import com.sujian.lines.data.CreatedResult;
+import com.sujian.lines.data.Data;
 import com.sujian.lines.data.entity.CommentBean;
 import com.sujian.lines.data.entity.DailyBeforeListBean;
 import com.sujian.lines.data.entity.DailyListBean;
@@ -9,6 +10,7 @@ import com.sujian.lines.data.entity.GankHttpResponse;
 import com.sujian.lines.data.entity.GankItemBean;
 import com.sujian.lines.data.entity.GankSearchItemBean;
 import com.sujian.lines.data.entity.HotListBean;
+import com.sujian.lines.data.entity.Like;
 import com.sujian.lines.data.entity.SectionChildListBean;
 import com.sujian.lines.data.entity.SectionListBean;
 import com.sujian.lines.data.entity.ThemeChildListBean;
@@ -23,6 +25,7 @@ import java.util.List;
 
 import okhttp3.RequestBody;
 import retrofit2.http.Body;
+import retrofit2.http.DELETE;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.Headers;
@@ -30,18 +33,19 @@ import retrofit2.http.POST;
 import retrofit2.http.PUT;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
+import retrofit2.http.Url;
 import rx.Observable;
 
 /**
  * Created by Administrator on 2016/3/23.
  */
 public interface ApiService {
+
     @POST("users")
     Observable<CreatedResult> createUser(@Body _User user);
 
     @GET("login")
     Observable<_User> login(@Query("username") String username, @Query("password") String password);
-
 
 
     @Headers("Content-Type: image/png")
@@ -52,9 +56,14 @@ public interface ApiService {
     @PUT("users/{uid}")
     Observable<CreatedResult> upUser(@Header("X-LC-Session") String session, @Path("uid") String uid, @Body UserModel.Face face);
 
+    @POST("classes/Like")
+    Observable<CreatedResult> createLike(@Body Like like);
 
+    @GET("classes/Like")
+    Observable<Data<Like>> queryLike(@Query("where") String where, @Query("limit") int limit);
 
-
+    @DELETE("classes/Like")
+    Observable<CreatedResult> deleteLike(@Query("objectId") String objectId);
     //知乎
     /**
      * 最新日报

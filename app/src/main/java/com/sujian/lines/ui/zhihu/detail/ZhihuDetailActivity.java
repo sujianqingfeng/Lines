@@ -8,6 +8,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v4.widget.NestedScrollView;
 import android.support.v7.widget.Toolbar;
 import android.transition.Transition;
+import android.view.KeyEvent;
 import android.view.View;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
@@ -23,6 +24,7 @@ import com.sujian.lines.base.util.ImageUtil;
 import com.sujian.lines.base.util.NetWorkUtil;
 import com.sujian.lines.base.util.ShareUtil;
 import com.sujian.lines.base.util.SpUtil;
+import com.sujian.lines.base.util.ToastUtil;
 import com.sujian.lines.data.entity.DetailExtraBean;
 import com.sujian.lines.data.entity.ZhihuDetailBean;
 import com.sujian.lines.ui.zhihu.comment.CommentActivity;
@@ -178,6 +180,26 @@ public class ZhihuDetailActivity extends BaseActivity<ZhihuDetailPresenter,Zhihu
         longNum = detailExtraBean.getLong_comments();
     }
 
+    @Override
+    public void setLikeCheck(boolean isLike) {
+        fabLike.setSelected(isLike);
+    }
+
+    @Override
+    public void shouMsg(String msg) {
+        ToastUtil.show(msg);
+    }
+
+    @OnClick(R.id.fab_like)
+    void likeArticle() {
+        if (fabLike.isSelected()) {
+            fabLike.setSelected(false);
+            mPresenter.deleteLikeData();
+        } else {
+            fabLike.setSelected(true);
+            mPresenter.insertLikeData();
+        }
+    }
 
 
     @OnClick(R.id.tv_detail_bottom_comment)
@@ -189,6 +211,14 @@ public class ZhihuDetailActivity extends BaseActivity<ZhihuDetailPresenter,Zhihu
         intent.putExtra("shortNum",shortNum);
         intent.putExtra("longNum",longNum);
         startActivity(intent);
+    }
+
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if ((keyCode == KeyEvent.KEYCODE_BACK) && wvDetailContent.canGoBack()) {
+            wvDetailContent.goBack();
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
     }
 
 

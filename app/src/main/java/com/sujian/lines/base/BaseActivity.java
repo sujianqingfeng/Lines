@@ -46,13 +46,13 @@ public abstract class BaseActivity<T extends BasePresenter, E extends BaseModel>
         mPresenter = TUtil.getT(this, 0);
         mModel = TUtil.getT(this, 1);
         //StatusBarUtil.setTransparent(this);
+        initWindow();
         if (this instanceof BaseView){
             mPresenter.setVM(this, mModel);
             Logger.e("绑定成功");
         }else {
             Logger.e("绑定失败");
         }
-        initWindow();
         this.initView();//写在绑定VM之前 会有空指针的异常 因为P层里面绑定的时候会执行一个onstrat的方法 里面调用view里面的东西可能会造成空指针
         App.getAppContext().addActivity(this);
     }
