@@ -17,6 +17,8 @@ import com.sujian.lines.base.BaseActivity;
 import com.sujian.lines.base.util.NetWorkUtil;
 import com.sujian.lines.base.util.ShareUtil;
 import com.sujian.lines.base.util.SpUtil;
+import com.sujian.lines.base.util.SystemUtil;
+import com.sujian.lines.base.util.ToastUtil;
 import com.wang.avi.AVLoadingIndicatorView;
 
 import butterknife.Bind;
@@ -105,6 +107,7 @@ public class TechDetailActivity extends BaseActivity<TechDetailPresenter,TechDet
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.tech_meun, menu);
         menuItem = menu.findItem(R.id.action_like);
+        mPresenter.queryLikeData(id);
         return true;
     }
 
@@ -113,15 +116,13 @@ public class TechDetailActivity extends BaseActivity<TechDetailPresenter,TechDet
         switch (id) {
             case R.id.action_like:
                 if(isLiked) {
-                    item.setIcon(R.mipmap.ic_toolbar_like_n);
-
+                    mPresenter.deleteLikeData();
                 } else {
-                    item.setIcon(R.mipmap.ic_toolbar_like_p);
-
+                    mPresenter.insertLikeData(getIntent());
                 }
                 break;
             case R.id.action_copy:
-                //SystemUtil.copyToClipBoard(mContext,url);
+                SystemUtil.copyToClipBoard(mContext,url);
                 return true;
             case R.id.action_share:
                 ShareUtil.shareText(mContext,url,"分享一篇文章");
@@ -129,7 +130,7 @@ public class TechDetailActivity extends BaseActivity<TechDetailPresenter,TechDet
         return super.onOptionsItemSelected(item);
     }
 
-    private void setLikeState(boolean state) {
+    public void setLikeState(boolean state) {
         if(state) {
             menuItem.setIcon(R.mipmap.ic_toolbar_like_p);
             isLiked = true;
@@ -137,5 +138,10 @@ public class TechDetailActivity extends BaseActivity<TechDetailPresenter,TechDet
             menuItem.setIcon(R.mipmap.ic_toolbar_like_n);
             isLiked = false;
         }
+    }
+
+    @Override
+    public void showMsg(String msg) {
+        ToastUtil.show(msg);
     }
 }

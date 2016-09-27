@@ -39,6 +39,5 @@ public class ZhihuDetailContract {
         abstract  void  insertLikeData();
         abstract  void  deleteLikeData();
         abstract  void  queryLikeData(int id);
-
     }
 }

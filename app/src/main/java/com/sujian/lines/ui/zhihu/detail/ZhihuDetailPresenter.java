@@ -30,9 +30,6 @@ public class ZhihuDetailPresenter extends ZhihuDetailContract.Presenter {
 
     @Override
     void getDetailData(int id) {
-
-        Logger.e("model 是否为空" +(mModel==null));
-
         mRxManager.add(mModel.getDetailData(id)
         .subscribe(new Subscriber<ZhihuDetailBean>() {
             @Override
@@ -42,7 +39,7 @@ public class ZhihuDetailPresenter extends ZhihuDetailContract.Presenter {
 
             @Override
             public void onError(Throwable e) {
-
+                mView.shouMsg("获取信息失败");
             }
 
             @Override
@@ -120,7 +117,7 @@ public class ZhihuDetailPresenter extends ZhihuDetailContract.Presenter {
 
             @Override
             public void onError(Throwable e) {
-
+                mView.shouMsg("取消收藏失败");
             }
 
             @Override

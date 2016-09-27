@@ -1,6 +1,8 @@
 package com.sujian.lines.ui.gank.tech;
 
+import com.sujian.lines.C;
 import com.sujian.lines.data.entity.GankItemBean;
+import com.sujian.lines.ui.wechat.fragment.WeChatFPresenter;
 
 import java.util.List;
 
@@ -95,6 +97,21 @@ public class TechPresenter extends TechContract.Presenter {
     }
 
     private void getMoreSearchGankData() {
+    }
+
+
+    public static int getTechType(String tech) {
+        switch (tech) {
+            case TechPresenter.TECH_ANDROID:
+                return C.TYPE_ANDROID;
+            case TechPresenter.TECH_IOS:
+                return C.TYPE_IOS;
+            case TechPresenter.TECH_WEB:
+                return C.TYPE_WEB;
+            case WeChatFPresenter.TECH_WECHAT:
+                return C.TYPE_WECHAT;
+        }
+        return C.TYPE_ANDROID;
     }
 
     @Override
