@@ -103,6 +103,7 @@ public class ZhihuDetailPresenter extends ZhihuDetailContract.Presenter {
             @Override
             public void onNext(CreatedResult createdResult) {
                 mView.shouMsg("收藏成功");
+                objectId=createdResult.getObjectId();
             }
         })
         );
@@ -110,7 +111,6 @@ public class ZhihuDetailPresenter extends ZhihuDetailContract.Presenter {
 
     @Override
     void deleteLikeData() {
-
         mRxManager.add(mModel.deleteLike(objectId)
         .subscribe(new Subscriber<CreatedResult>() {
             @Override

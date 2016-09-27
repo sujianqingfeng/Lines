@@ -33,37 +33,71 @@ import retrofit2.http.POST;
 import retrofit2.http.PUT;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
-import retrofit2.http.Url;
 import rx.Observable;
 
 /**
- * Created by Administrator on 2016/3/23.
+ * Api接口
  */
 public interface ApiService {
-
+    //LeanClound
+    /**
+     *  注册
+     */
     @POST("users")
     Observable<CreatedResult> createUser(@Body _User user);
-
+    /**
+     * 登陆
+     */
     @GET("login")
     Observable<_User> login(@Query("username") String username, @Query("password") String password);
 
-
+    /**
+     * 上传文件
+     * @param name
+     * @param body
+     * @return
+     */
     @Headers("Content-Type: image/png")
     @POST("files/{name}")
     Observable<CreatedResult> upFile(@Path("name") String name, @Body RequestBody body);
 
-
+    /**
+     * 更新用户
+     * @param session
+     * @param uid
+     * @param face
+     * @return
+     */
     @PUT("users/{uid}")
     Observable<CreatedResult> upUser(@Header("X-LC-Session") String session, @Path("uid") String uid, @Body UserModel.Face face);
 
+    /**
+     * 添加收藏
+     * @param like
+     * @return
+     */
     @POST("classes/Like")
     Observable<CreatedResult> createLike(@Body Like like);
 
+    /**
+     * 查询收藏
+     * @param where
+     * @param limit
+     * @return
+     */
     @GET("classes/Like")
     Observable<Data<Like>> queryLike(@Query("where") String where, @Query("limit") int limit);
 
-    @DELETE("classes/Like")
-    Observable<CreatedResult> deleteLike(@Query("objectId") String objectId);
+    /**
+     * 删除收藏
+     * @param objectId
+     * @return
+     */
+    @DELETE("classes/Like/{objectId}")
+    Observable<CreatedResult> deleteLike(@Path("objectId") String objectId);
+
+
+
     //知乎
     /**
      * 最新日报
