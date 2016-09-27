@@ -88,6 +88,16 @@ public interface ApiService {
     @GET("classes/Like")
     Observable<Data<Like>> queryLike(@Query("where") String where, @Query("limit") int limit);
 
+
+    /**
+     * 查询收藏
+     * @param where
+     * @param limit
+     * @return
+     */
+    @GET("classes/Like")
+    Observable<Data<Like>> queryLike(@Query("where") String where,@Query("skip") int skip, @Query("limit") int limit);
+
     /**
      * 删除收藏
      * @param objectId
