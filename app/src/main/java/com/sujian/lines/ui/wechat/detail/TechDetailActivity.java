@@ -23,7 +23,7 @@ import com.wang.avi.AVLoadingIndicatorView;
 
 import butterknife.Bind;
 
-public class TechDetailActivity extends BaseActivity<TechDetailPresenter,TechDetailModel> implements TechDetailContract.View {
+public class TechDetailActivity extends BaseActivity<TechDetailPresenter, TechDetailModel> implements TechDetailContract.View {
 
     @Bind(R.id.tool_bar)
     Toolbar toolBar;
@@ -34,7 +34,7 @@ public class TechDetailActivity extends BaseActivity<TechDetailPresenter,TechDet
 
     MenuItem menuItem;
 
-    String title,url,id,tech;
+    String title, url, id, tech;
     boolean isLiked;
 
     @Override
@@ -49,7 +49,7 @@ public class TechDetailActivity extends BaseActivity<TechDetailPresenter,TechDet
         title = intent.getExtras().getString("title");
         url = intent.getExtras().getString("url");
         id = intent.getExtras().getString("id");
-        setToolBar(toolBar,title);
+        setToolBar(toolBar, title);
         WebSettings settings = wvTechContent.getSettings();
         if (SpUtil.getNoImageState()) {
             settings.setBlockNetworkImage(true);
@@ -68,23 +68,26 @@ public class TechDetailActivity extends BaseActivity<TechDetailPresenter,TechDet
         settings.setLoadWithOverviewMode(true);
         settings.setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN);
         settings.setSupportZoom(true);
-        wvTechContent.setWebViewClient(new WebViewClient(){
+        wvTechContent.setWebViewClient(new WebViewClient() {
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
                 view.loadUrl(url);
                 return true;
             }
         });
-        wvTechContent.setWebChromeClient(new WebChromeClient(){
+        wvTechContent.setWebChromeClient(new WebChromeClient() {
             @Override
             public void onProgressChanged(WebView view, int newProgress) {
                 super.onProgressChanged(view, newProgress);
                 if (newProgress == 100) {
-                    viewLoading.smoothToHide();
+                    if (viewLoading != null)
+                        viewLoading.smoothToHide();
                 } else {
-                    viewLoading.smoothToShow();
+                    if (viewLoading != null)
+                        viewLoading.smoothToShow();
                 }
             }
+
             @Override
             public void onReceivedTitle(WebView view, String title) {
                 super.onReceivedTitle(view, title);
@@ -103,6 +106,14 @@ public class TechDetailActivity extends BaseActivity<TechDetailPresenter,TechDet
         return super.onKeyDown(keyCode, event);
     }
 
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (wvTechContent != null)
+            wvTechContent.destroy();
+    }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.tech_meun, menu);
@@ -111,27 +122,28 @@ public class TechDetailActivity extends BaseActivity<TechDetailPresenter,TechDet
         return true;
     }
 
-    @Override public boolean onOptionsItemSelected(MenuItem item) {
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         switch (id) {
             case R.id.action_like:
-                if(isLiked) {
+                if (isLiked) {
                     mPresenter.deleteLikeData();
                 } else {
                     mPresenter.insertLikeData(getIntent());
                 }
                 break;
             case R.id.action_copy:
-                SystemUtil.copyToClipBoard(mContext,url);
+                SystemUtil.copyToClipBoard(mContext, url);
                 return true;
             case R.id.action_share:
-                ShareUtil.shareText(mContext,url,"分享一篇文章");
+                ShareUtil.shareText(mContext, url, "分享一篇文章");
         }
         return super.onOptionsItemSelected(item);
     }
 
     public void setLikeState(boolean state) {
-        if(state) {
+        if (state) {
             menuItem.setIcon(R.mipmap.ic_toolbar_like_p);
             isLiked = true;
         } else {
