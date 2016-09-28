@@ -22,9 +22,11 @@ import com.sujian.lines.R;
 import com.sujian.lines.base.util.SpUtil;
 import com.sujian.lines.base.util.StatusBarUtil;
 import com.sujian.lines.base.util.TUtil;
+import com.sujian.lines.data.event.NightModeEvent;
 import com.sujian.lines.view.layout.SwipeBackLayout;
 
 import butterknife.ButterKnife;
+import rx.functions.Action1;
 
 
 public abstract class BaseActivity<T extends BasePresenter, E extends BaseModel> extends AppCompatActivity {
@@ -55,6 +57,19 @@ public abstract class BaseActivity<T extends BasePresenter, E extends BaseModel>
         }
         this.initView();//写在绑定VM之前 会有空指针的异常 因为P层里面绑定的时候会执行一个onstrat的方法 里面调用view里面的东西可能会造成空指针
         App.getAppContext().addActivity(this);
+        initRxManager();
+    }
+
+    //订阅事件 日夜间模式
+    private void initRxManager() {
+        RxManager rxManager=new RxManager();
+        rxManager.on("night", new Action1<Object>() {
+            @Override
+            public void call(Object o) {
+                NightModeEvent event=(NightModeEvent)o;
+                SpUtil.setNight(mContext,event.isNight());
+            }
+        });
     }
 
     @Override

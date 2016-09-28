@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
+    android:background="@color/colorBackground"
     tools:context="com.sujian.lines.ui.like.LikeActivity">
 
     <android.support.design.widget.AppBarLayout
@@ -24,7 +25,8 @@
         android:id="@+id/rv_like"
         android:layout_marginTop="8dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
+        android:background="@color/colorBackground"
         app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
 

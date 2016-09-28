@@ -1,16 +1,12 @@
 package com.sujian.lines.ui.gank.activity;
 
 import android.os.Bundle;
-import android.view.View;
 
 import com.sujian.lines.R;
 import com.sujian.lines.base.BaseViewPagerActivity;
 import com.sujian.lines.base.util.ActivityFragmentInject;
-import com.sujian.lines.ui.gank.android.AndroidFragment;
-import com.sujian.lines.ui.gank.ios.IosFragment;
 import com.sujian.lines.ui.gank.tech.TechFragment;
 import com.sujian.lines.ui.gank.tech.TechPresenter;
-import com.sujian.lines.ui.gank.web.WebFragment;
 import com.sujian.lines.ui.gank.welfare.WelfareFragment;
 
 @ActivityFragmentInject(menuDefaultCheckedItem = R.id.drawer_gank,toolbarTitle = R.string.gank)

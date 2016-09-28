@@ -140,12 +140,12 @@ public abstract class BaseMenuActivity<T extends BasePresenter, E extends BaseMo
      * 初始化侧边菜单
      */
     private void initMenu() {
+        //设置选中
         if (mMenuDefaultCheckedItem != -1 && mMenuDefaultCheckedItem != 0) {
-
             main_toorbar.setTitle(mToolbarTitle);
             nv_menu.setCheckedItem(mMenuDefaultCheckedItem);
         }
-
+        //导航选择
         nv_menu.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(MenuItem item) {

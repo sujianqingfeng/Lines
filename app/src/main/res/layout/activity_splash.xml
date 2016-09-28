@@ -14,7 +14,7 @@
         android:layout_height="100dp"
         android:background="@android:color/transparent"
         android:gravity="center"
-        android:textColor="@color/buleTextColor"
+        android:textColor="@color/colorPrimary"
         android:textSize="30sp" />
 
 

@@ -1,37 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="window_background">#FFF5F5F5</color>
-    <color name="colorPrimary">#2196F3</color>
-    <color name="colorPrimaryDark">#1565C0</color>
-    <color name="colorAccent">#E91E63</color>
+    <color name="colorPrimary">#0F1010</color>
+    <color name="colorPrimaryDark">#0F1010</color>
+    <color name="colorAccent">#181921</color>
+    <color name="colorBackground">#0F1010</color>
+    <color name="colorCard">#202124</color>
+    <color name="colorText">#6B6D72</color>
 
-    <color name="buleTextColor">#35BAF3</color>
+    <color name="fab_bg">#6b6d72</color>
+    <color name="drawer_item_bg_p">#6b6d72</color>
+    <color name="drawer_item_bg_n">#303030</color>
+    <color name="news_unread">#999999</color>
+    <color name="news_read">#6b6d72</color>
 
-    <color name="theme_black_7f">#8f000000</color>
-
-    <color name="colorBackground">#EEEEEE</color>
-    <color name="colorCard">#FFFFFF</color>
-    <color name="colorText">#2C2C2C</color>
-    <color name="fab_bg">#FF4081</color>
-    <color name="bottom_shadow">#6e000000</color>
-    <color name="drawer_item_bg_p">#e8e8e8</color>
-    <color name="drawer_item_bg_n">#fffff9</color>
-    <color name="drawer_header_text">#2c2c2c</color>
-    <color name="toast_bg">#dddfe0</color>
-    <color name="black_bg">#d0000000</color>
-    <color name="bottom_text">#a9a9a9</color>
-    <color name="news_unread">#000000</color>
-    <color name="news_read">#898989</color>
-    <color name="comment_text">#5b5d5c</color>
-    <color name="comment_reply">#9ba4a3</color>
-    <color name="comment_btn">#bfbfbf</color>
-    <color name="comment_line">#dddddd</color>
-    <color name="comment_at">#5d8698</color>
-    <color name="preferences_title">#00618c</color>
+    <color name="comment_text">#bdb4b3</color>
+    <color name="comment_reply">#606266</color>
+    <color name="comment_btn">#606266</color>
+    <color name="comment_line">#222222</color>
+    <color name="comment_at">#3289b3</color>
 
 
 
     <color name="theme_color_primary">#2d2d2d</color>
     <color name="theme_color_primary_dark">#242424</color>
     <color name="theme_color_primary_trans">#992d2d2d</color>
+    <color name="theme_black_7f">#8f000000</color>
 </resources>

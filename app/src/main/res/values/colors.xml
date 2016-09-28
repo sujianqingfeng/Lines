@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#2196F3</color>
-    <color name="colorPrimaryDark">#1565C0</color>
-    <color name="colorAccent">#E91E63</color>
+    <color name="colorPrimary">#fb7299</color>
+    <color name="colorPrimaryDark">#b85671</color>
+    <color name="colorAccent">#99f0486c</color>
 
     <color name="buleTextColor">#35BAF3</color>
 
@@ -28,11 +28,9 @@
     <color name="comment_at">#5d8698</color>
     <color name="preferences_title">#00618c</color>
 
-
     <color name="theme_color_primary">#fb7299</color>
     <color name="theme_color_primary_dark">#b85671</color>
     <color name="theme_color_primary_trans">#99f0486c</color>
-
 
     <color name="window_background">#eaeaea</color>
 

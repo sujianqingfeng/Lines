@@ -14,7 +14,7 @@
     <dimen name="top_viewpager_height">200dp</dimen>
     <dimen name="drawer_image_height">180dp</dimen>
     <dimen name="detail_image_height">260dp</dimen>
-    <dimen name="detail_bottom_height">64dp</dimen>
+    <dimen name="detail_bottom_height">60dp</dimen>
     <dimen name="tech_image_height">300dp</dimen>
     <dimen name="tech_icon_size">32dp</dimen>
     <dimen name="theme_image_height">120dp</dimen>

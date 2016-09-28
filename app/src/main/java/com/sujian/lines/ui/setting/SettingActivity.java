@@ -3,27 +3,32 @@ package com.sujian.lines.ui.setting;
 
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
-import android.support.design.widget.TabLayout;
-import android.support.v7.widget.AppCompatCheckBox;
 import android.support.v7.widget.SwitchCompat;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.CompoundButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.orhanobut.logger.Logger;
 import com.sujian.lines.App;
 import com.sujian.lines.R;
 import com.sujian.lines.base.BaseActivity;
+import com.sujian.lines.base.RxManager;
 import com.sujian.lines.base.util.ACache;
 import com.sujian.lines.base.util.SpUtil;
 import com.sujian.lines.base.util.ToastUtil;
+import com.sujian.lines.data.event.NightModeEvent;
 
 import java.io.File;
 
 import butterknife.Bind;
 import butterknife.OnClick;
 
-public class SettingActivity extends BaseActivity<SettingPresenter, SettingModel> implements SettingContract.View {
+/**
+ * 设置界面view
+ */
+public class SettingActivity extends BaseActivity<SettingPresenter, SettingModel> implements SettingContract.View,CompoundButton.OnCheckedChangeListener {
 
     @Bind(R.id.tb_setting)
     Toolbar toolbar;
@@ -45,6 +50,8 @@ public class SettingActivity extends BaseActivity<SettingPresenter, SettingModel
     @Bind(R.id.ll_setting_update)
     LinearLayout llSettingUpdate;
 
+    private File cacheFile;
+
     @Override
     public int getLayoutId() {
         return R.layout.activity_setting;
@@ -57,7 +64,12 @@ public class SettingActivity extends BaseActivity<SettingPresenter, SettingModel
         scSettingImage.setChecked(SpUtil.getNoImageState());
         scSettingNight.setChecked(SpUtil.isNight());
 
-        File cacheFile = new File(App.getAppContext().getCacheDir(), "cache");
+        //设置监听
+        scSettingCache.setOnCheckedChangeListener(this);
+        scSettingImage.setOnCheckedChangeListener(this);
+        scSettingNight.setOnCheckedChangeListener(this);
+
+        cacheFile = new File(App.getAppContext().getCacheDir(), "cache");
         tvSettingClear.setText(ACache.getCacheSize(cacheFile));
 
 
@@ -81,7 +93,8 @@ public class SettingActivity extends BaseActivity<SettingPresenter, SettingModel
                 break;
 
             case R.id.ll_setting_clear:
-
+                ACache.deleteDir(cacheFile);
+                tvSettingClear.setText(ACache.getCacheSize(cacheFile));
                 break;
 
             case R.id.ll_setting_update:
@@ -90,4 +103,19 @@ public class SettingActivity extends BaseActivity<SettingPresenter, SettingModel
         }
     }
 
+    @Override
+    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+        switch (buttonView.getId()){
+            case R.id.sc_cache://自动缓存
+               SpUtil.setAutoCacheState(isChecked);
+                break;
+            case R.id.sc_setting_image://无图模式
+                SpUtil.setNoImageState(isChecked);
+                break;
+            case R.id.sc_setting_night://日夜间模式
+                RxManager rxManager=new RxManager();
+                rxManager.post("night",new NightModeEvent(!SpUtil.isNight()));
+                break;
+        }
+    }
 }
