@@ -47,12 +47,7 @@ public class UserActivity extends BaseActivity<UserPresenter, UserModel> impleme
     public void initView() {
         _User user = (_User) getIntent().getSerializableExtra(C.HEAD_DATA);
         initUser(user);
-        setSupportActionBar(toolbar);
-        final ActionBar ab = getSupportActionBar();
-        ab.setDisplayHomeAsUpEnabled(true);
         ViewCompat.setTransitionName(image, TRANSLATE_VIEW);
-
-
 
         fab.setOnClickListener((view ->
                 chooseDialog()
@@ -99,7 +94,7 @@ public class UserActivity extends BaseActivity<UserPresenter, UserModel> impleme
     @Override
     public void initUser(_User user) {
         ImageUtil.loadRoundAndBgImg(image, user.getFace(), im_header);
-        setTitle(user.getUsername());
+        setToolBar(toolbar,user.getUsername());
     }
 
     @Override
