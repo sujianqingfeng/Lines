@@ -1,7 +1,7 @@
 # Lines 客户端 （未完 待续）
-Lines资讯，毕业设计Android，这个客户端实际上是仿照的GeekNews做的。里面的架构与GeekNews相比有很大的不同，我用的是T-MVP的架构。不过再怎么变化，MVP的核心思想是不会变的。
+Lines资讯，毕业设计Android，这个客户端实际上是仿照的GeekNews做的。里面的架构与GeekNews相比有很大的不同，我用的是T-MVP的架构。不过再怎么变化，MVP的核心思想是不会变的。APK下载地址：http://fir.im/Lines
 
-##项目特点
+## 项目特点
 - 采用MVP架构
 - RxJava
 - Retrofit2
