@@ -25,7 +25,6 @@ public class HomePresenter extends HomeContract.Presenter {
     @Override
     public void getUserInfo() {
         _User user = SpUtil.getUser();
-        System.err.println(user==null);
         if (user != null)
             mView.initUserInfo(user);
     }

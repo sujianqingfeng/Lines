@@ -22,6 +22,6 @@ public class HomeContract {
 
     abstract static class Presenter extends BasePresenter<Model,View>{
         abstract void showTabs();
-        public abstract void getUserInfo();
+        abstract void getUserInfo();
     }
 }

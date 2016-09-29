@@ -13,14 +13,12 @@
         android:layout_height="0dp"
         android:layout_weight="1.0"
         android:fitsSystemWindows="true">
-
         <android.support.design.widget.AppBarLayout
             android:id="@+id/appbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fitsSystemWindows="true"
             android:theme="@style/AppTheme.AppBarOverlay">
-
             <android.support.design.widget.CollapsingToolbarLayout
                 android:id="@+id/collapsing_toolbar"
                 android:layout_width="match_parent"
@@ -35,7 +33,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:fitsSystemWindows="true">
-
                     <ImageView
                         android:id="@+id/im_header"
                         android:layout_width="match_parent"
@@ -44,7 +41,6 @@
                         android:layout_gravity="center"
                         android:fitsSystemWindows="true"
                         android:scaleType="centerCrop" />
-
 
                     <ImageView
                         android:id="@+id/image"
@@ -58,20 +54,16 @@
                         app:layout_collapseParallaxMultiplier="0.7" />
                 </RelativeLayout>
 
-
                 <android.support.v7.widget.Toolbar
                     android:id="@+id/toolbar"
                     android:layout_width="match_parent"
                     android:layout_height="?attr/actionBarSize"
-
                     app:layout_collapseMode="pin"
                     app:layout_scrollFlags="scroll|exitUntilCollapsed"
                     app:popupTheme="@style/AppTheme.PopupOverlay" />
 
             </android.support.design.widget.CollapsingToolbarLayout>
-
         </android.support.design.widget.AppBarLayout>
-
 
 
         <android.support.design.widget.FloatingActionButton
@@ -83,9 +75,16 @@
             android:onClick="checkin"
             android:src="@drawable/ic_whilte_send"
             app:layout_anchor="@id/appbar"
+            android:background="@color/fab_bg"
             app:layout_anchorGravity="bottom|right|end" />
 
 
+        <TextView
+            android:textColor="@color/colorText"
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="暂且不知道写什么内容"/>
     </android.support.design.widget.CoordinatorLayout>
 
 

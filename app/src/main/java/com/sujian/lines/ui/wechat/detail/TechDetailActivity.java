@@ -12,6 +12,7 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
+import com.afollestad.materialdialogs.MaterialDialog;
 import com.sujian.lines.R;
 import com.sujian.lines.base.BaseActivity;
 import com.sujian.lines.base.util.NetWorkUtil;
@@ -19,6 +20,7 @@ import com.sujian.lines.base.util.ShareUtil;
 import com.sujian.lines.base.util.SpUtil;
 import com.sujian.lines.base.util.SystemUtil;
 import com.sujian.lines.base.util.ToastUtil;
+import com.sujian.lines.ui.login.LoginActivity;
 import com.wang.avi.AVLoadingIndicatorView;
 
 import butterknife.Bind;
@@ -127,10 +129,19 @@ public class TechDetailActivity extends BaseActivity<TechDetailPresenter, TechDe
         int id = item.getItemId();
         switch (id) {
             case R.id.action_like:
-                if (isLiked) {
-                    mPresenter.deleteLikeData();
-                } else {
-                    mPresenter.insertLikeData(getIntent());
+                if (SpUtil.getUser() == null) {
+                    new MaterialDialog.Builder(mContext)
+                            .title("提示")
+                            .content("骚年 你还没有登录，确定登录？")
+                            .negativeText("取消")
+                            .positiveText("确定")
+                            .onPositive((dialog, which) -> startActivity(new Intent(mContext, LoginActivity.class)));
+                }else {
+                    if (isLiked) {
+                        mPresenter.deleteLikeData();
+                    } else {
+                        mPresenter.insertLikeData(getIntent());
+                    }
                 }
                 break;
             case R.id.action_copy:

@@ -16,6 +16,7 @@ import com.sujian.lines.R;
 import com.sujian.lines.base.BaseActivity;
 import com.sujian.lines.base.util.ShareUtil;
 import com.sujian.lines.base.util.SystemUtil;
+import com.sujian.lines.base.util.ToastUtil;
 
 import butterknife.Bind;
 import uk.co.senab.photoview.PhotoViewAttacher;
@@ -92,7 +93,7 @@ public class GirlDetailActivity extends BaseActivity<GirlDetailPresenter,GirlDet
         return super.onOptionsItemSelected(item);
     }
 
-    private void setLikeState(boolean state) {
+    public void setLikeState(boolean state) {
         if(state) {
             menuItem.setIcon(R.mipmap.ic_toolbar_like_p);
             isLiked = true;
@@ -100,5 +101,10 @@ public class GirlDetailActivity extends BaseActivity<GirlDetailPresenter,GirlDet
             menuItem.setIcon(R.mipmap.ic_toolbar_like_n);
             isLiked = false;
         }
+    }
+
+    @Override
+    public void showMsg(String msg) {
+        ToastUtil.show(msg);
     }
 }

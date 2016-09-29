@@ -25,13 +25,12 @@ import butterknife.ButterKnife;
  * Mail:121116111@qq.com
  */
 
-public class LikeAdapter extends SwipeMenuAdapter<LikeAdapter.ViewHolder> {
+public class LikeAdapter extends SwipeMenuAdapter<RecyclerView.ViewHolder> {
 
     private List<Like> restules;
     private LayoutInflater inflater;
     private OnItemClickListener onItemClickListener;
     private Context context;
-
 
     public LikeAdapter(Context context, List<Like> restules) {
         this.restules = restules;
@@ -39,47 +38,70 @@ public class LikeAdapter extends SwipeMenuAdapter<LikeAdapter.ViewHolder> {
         inflater = LayoutInflater.from(context);
     }
 
+
+    //返回的类型是图片就返回1 其他都返回0
+    @Override
+    public int getItemViewType(int position) {
+        Like like = restules.get(position);
+        if (like.getType()==C.TYPE_GIRL)
+            return 1;
+        return 0;
+    }
+
     @Override
     public View onCreateContentView(ViewGroup parent, int viewType) {
+        if (viewType==1)
+            return inflater.inflate(R.layout.item_like_girl,parent,false);
         return inflater.inflate(R.layout.item_like,parent,false);
     }
 
     @Override
-    public ViewHolder onCompatCreateViewHolder(View realContentView, int viewType) {
+    public RecyclerView.ViewHolder onCompatCreateViewHolder(View realContentView, int viewType) {
+        if (viewType==1)
+            return new GirlViewHolder(realContentView);
         return new ViewHolder(realContentView);
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
+    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         Like like = restules.get(position);
 
-        holder.tv_title.setText(like.getTitle());
-       switch (like.getType()){
-           case C.TYPE_ZHIHU:
-               ImageUtil.loadImg(context,holder.imageView,like.getImage());
-               holder.tv_source.setText("来自 知乎");
-               break;
+        if (holder instanceof ViewHolder){
+            ViewHolder viewHolder= (ViewHolder) holder;
+            viewHolder.tv_title.setText(like.getTitle());
+            switch (like.getType()){
+                case C.TYPE_ZHIHU:
+                    ImageUtil.loadImg(context,viewHolder.imageView,like.getImage());
+                    viewHolder.tv_source.setText("来自 知乎");
+                    break;
 
-           case C.TYPE_ANDROID:
-               holder.tv_source.setText("来自 Android");
-               holder.imageView.setBackgroundResource(R.mipmap.ic_android);
-               break;
+                case C.TYPE_ANDROID:
+                    viewHolder.tv_source.setText("来自 Android");
+                    viewHolder.imageView.setBackgroundResource(R.mipmap.ic_android);
+                    break;
 
-           case C.TYPE_IOS:
-               holder.imageView.setBackgroundResource(R.mipmap.ic_ios);
-               holder.tv_source.setText("来自 IOS");
-               break;
+                case C.TYPE_IOS:
+                    viewHolder.imageView.setBackgroundResource(R.mipmap.ic_ios);
+                    viewHolder.tv_source.setText("来自 IOS");
+                    break;
 
-           case C.TYPE_WEB:
-               holder.imageView.setBackgroundResource(R.mipmap.ic_web);
-               holder.tv_source.setText("来自 Web");
-               break;
+                case C.TYPE_WEB:
+                    viewHolder.imageView.setBackgroundResource(R.mipmap.ic_web);
+                    viewHolder.tv_source.setText("来自 Web");
+                    break;
 
-           case C.TYPE_WECHAT:
-               ImageUtil.loadImg(context,holder.imageView,like.getLid());
-               holder.tv_source.setText("来自 微信");
-               break;
-       }
+                case C.TYPE_WECHAT:
+                    ImageUtil.loadImg(context,viewHolder.imageView,like.getLid());
+                    viewHolder.tv_source.setText("来自 微信");
+                    break;
+            }
+        }else {
+            GirlViewHolder viewHolder= (GirlViewHolder) holder;
+            ImageUtil.loadImg(context,viewHolder.imageView,like.getLid());
+            viewHolder.tv_source.setText("来自 Welfare");
+        }
+
+
     }
 
     @Override
@@ -97,6 +119,18 @@ public class LikeAdapter extends SwipeMenuAdapter<LikeAdapter.ViewHolder> {
         TextView tv_title;
 
         public ViewHolder(View itemView) {
+            super(itemView);
+            ButterKnife.bind(this, itemView);
+        }
+    }
+
+    public static class GirlViewHolder extends RecyclerView.ViewHolder {
+        @Bind(R.id.iv_item_like)
+        ImageView imageView;
+        @Bind(R.id.tv_item_source)
+        TextView tv_source;
+
+        public GirlViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
         }

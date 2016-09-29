@@ -15,6 +15,7 @@ import android.view.View;
 import android.widget.DatePicker;
 
 
+import com.afollestad.materialdialogs.MaterialDialog;
 import com.orhanobut.logger.Logger;
 import com.sujian.lines.C;
 import com.sujian.lines.R;
@@ -22,8 +23,10 @@ import com.sujian.lines.base.BaseViewPagerActivity;
 import com.sujian.lines.base.RxManager;
 import com.sujian.lines.base.util.ActivityFragmentInject;
 import com.sujian.lines.base.util.ImageUtil;
+import com.sujian.lines.base.util.SpUtil;
 import com.sujian.lines.data.entity._User;
 import com.sujian.lines.data.event.TimeEvent;
+import com.sujian.lines.ui.login.LoginActivity;
 import com.sujian.lines.ui.user.UserActivity;
 import com.sujian.lines.ui.zhihu.daily.DailyFragment;
 import com.sujian.lines.ui.zhihu.hot.HotFragment;
@@ -33,8 +36,9 @@ import com.sujian.lines.ui.zhihu.theme.ThemeFragment;
 import java.util.Calendar;
 
 import butterknife.Bind;
-@ActivityFragmentInject(menuDefaultCheckedItem = R.id.drawer_zhihu,toolbarTitle = R.string.zhihu)
-public class HomeActivity extends BaseViewPagerActivity<HomePresenter,HomeModel> implements HomeContract.View {
+
+@ActivityFragmentInject(menuDefaultCheckedItem = R.id.drawer_zhihu, toolbarTitle = R.string.zhihu)
+public class HomeActivity extends BaseViewPagerActivity<HomePresenter, HomeModel> implements HomeContract.View {
 
     @Bind(R.id.dl_main)
     DrawerLayout dlMainDrawer;
@@ -48,7 +52,6 @@ public class HomeActivity extends BaseViewPagerActivity<HomePresenter,HomeModel>
     public int getLayoutId() {
         return R.layout.activity_home;
     }
-
 
 
     @TargetApi(Build.VERSION_CODES.N)
@@ -67,7 +70,7 @@ public class HomeActivity extends BaseViewPagerActivity<HomePresenter,HomeModel>
 
             @Override
             public void onPageSelected(int position) {
-                if(position == 0)  fab.setVisibility(View.VISIBLE);
+                if (position == 0) fab.setVisibility(View.VISIBLE);
                 else fab.setVisibility(View.GONE);
             }
 
@@ -81,15 +84,15 @@ public class HomeActivity extends BaseViewPagerActivity<HomePresenter,HomeModel>
         fab.setOnClickListener((view -> {
             Calendar instance = Calendar.getInstance();
             int year = instance.get(Calendar.YEAR);
-            int month=instance.get(Calendar.MONTH);
-            int day=instance.get(Calendar.DAY_OF_MONTH);
-            Logger.e("现在的时间"+year+"-"+(month+1)+"-"+day);
-            DatePickerDialog dialog=new DatePickerDialog(mContext,new DatePickerDialog.OnDateSetListener() {
+            int month = instance.get(Calendar.MONTH);
+            int day = instance.get(Calendar.DAY_OF_MONTH);
+            Logger.e("现在的时间" + year + "-" + (month + 1) + "-" + day);
+            DatePickerDialog dialog = new DatePickerDialog(mContext, new DatePickerDialog.OnDateSetListener() {
                 @Override
                 public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-                    Logger.e("设置的时间"+year+"-"+(monthOfYear+1)+"-"+dayOfMonth);
-                    RxManager rx=new RxManager();
-                    rx.post(C.EVENT_TIME,new TimeEvent(dayOfMonth,monthOfYear+1,year));
+                    Logger.e("设置的时间" + year + "-" + (monthOfYear + 1) + "-" + dayOfMonth);
+                    RxManager rx = new RxManager();
+                    rx.post(C.EVENT_TIME, new TimeEvent(dayOfMonth, monthOfYear + 1, year));
                 }
             }, year, month, day);
 
@@ -101,10 +104,10 @@ public class HomeActivity extends BaseViewPagerActivity<HomePresenter,HomeModel>
     @Override
     protected void initViewPager() {
         super.initViewPager();
-        DailyFragment dailyFragment=new DailyFragment();
-        ThemeFragment themeFragment=new ThemeFragment();
-        SectionFragment sectionFragment=new SectionFragment();
-        HotFragment hotFragment=new HotFragment();
+        DailyFragment dailyFragment = new DailyFragment();
+        ThemeFragment themeFragment = new ThemeFragment();
+        SectionFragment sectionFragment = new SectionFragment();
+        HotFragment hotFragment = new HotFragment();
 
         fragments.add(dailyFragment);
         fragments.add(themeFragment);
@@ -124,12 +127,21 @@ public class HomeActivity extends BaseViewPagerActivity<HomePresenter,HomeModel>
 
     @Override
     public void initUserInfo(_User user) {
-        ImageUtil.loadRoundImg(mContext,iv_face, user.getFace());
+        ImageUtil.loadRoundImg(mContext, iv_face, user.getFace());
         tv_name.setText(user.getUsername());
-        iv_face.setOnClickListener(v ->
+        iv_face.setOnClickListener(v -> {
+            if (SpUtil.getUser() == null) {
+                new MaterialDialog.Builder(mContext)
+                        .title("提示")
+                        .content("骚年 你还没有登录，确定登录？")
+                        .negativeText("取消")
+                        .positiveText("确定")
+                        .onPositive((dialog, which) -> startActivity(new Intent(mContext, LoginActivity.class)));
+            } else {
                 ActivityCompat.startActivity((Activity) mContext, new Intent(mContext, UserActivity.class).putExtra(C.HEAD_DATA, user)
-                        , ActivityOptionsCompat.makeSceneTransitionAnimation((Activity) mContext, iv_face, UserActivity.TRANSLATE_VIEW).toBundle())
-        );
+                        , ActivityOptionsCompat.makeSceneTransitionAnimation((Activity) mContext, iv_face, UserActivity.TRANSLATE_VIEW).toBundle());
+            }
+        });
     }
 
 

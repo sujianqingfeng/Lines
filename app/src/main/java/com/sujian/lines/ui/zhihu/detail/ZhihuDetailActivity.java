@@ -17,6 +17,7 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.afollestad.materialdialogs.MaterialDialog;
 import com.sujian.lines.R;
 import com.sujian.lines.base.BaseActivity;
 import com.sujian.lines.base.util.HtmlUtil;
@@ -27,6 +28,7 @@ import com.sujian.lines.base.util.SpUtil;
 import com.sujian.lines.base.util.ToastUtil;
 import com.sujian.lines.data.entity.DetailExtraBean;
 import com.sujian.lines.data.entity.ZhihuDetailBean;
+import com.sujian.lines.ui.login.LoginActivity;
 import com.sujian.lines.ui.zhihu.comment.CommentActivity;
 import com.wang.avi.AVLoadingIndicatorView;
 
@@ -192,12 +194,21 @@ public class ZhihuDetailActivity extends BaseActivity<ZhihuDetailPresenter,Zhihu
 
     @OnClick(R.id.fab_like)
     void likeArticle() {
-        if (fabLike.isSelected()) {
-            fabLike.setSelected(false);
-            mPresenter.deleteLikeData();
-        } else {
-            fabLike.setSelected(true);
-            mPresenter.insertLikeData();
+        if (SpUtil.getUser() == null) {
+            new MaterialDialog.Builder(mContext)
+                    .title("提示")
+                    .content("骚年 你还没有登录，确定登录？")
+                    .negativeText("取消")
+                    .positiveText("确定")
+                    .onPositive((dialog, which) -> startActivity(new Intent(mContext, LoginActivity.class)));
+        }else {
+            if (fabLike.isSelected()) {
+                fabLike.setSelected(false);
+                mPresenter.deleteLikeData();
+            } else {
+                fabLike.setSelected(true);
+                mPresenter.insertLikeData();
+            }
         }
     }
 

@@ -26,6 +26,7 @@ import com.sujian.lines.ui.about.AboutMeActivity;
 import com.sujian.lines.ui.gank.activity.GankActivity;
 import com.sujian.lines.ui.home.HomeActivity;
 import com.sujian.lines.ui.like.LikeActivity;
+import com.sujian.lines.ui.login.LoginActivity;
 import com.sujian.lines.ui.setting.SettingActivity;
 import com.sujian.lines.ui.wechat.WeChatActivity;
 
@@ -56,6 +57,8 @@ public abstract class BaseMenuActivity<T extends BasePresenter, E extends BaseMo
     protected int mToolbarTitle;
     protected ImageView iv_face;
     protected TextView tv_name;
+
+    private Class mClass = null;
 
     @Override
     public abstract int getLayoutId();
@@ -149,7 +152,7 @@ public abstract class BaseMenuActivity<T extends BasePresenter, E extends BaseMo
         nv_menu.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(MenuItem item) {
-                Class mClass = null;
+
                 switch (item.getItemId()) {
                     case R.id.drawer_zhihu:
                         mClass = HomeActivity.class;
@@ -162,7 +165,16 @@ public abstract class BaseMenuActivity<T extends BasePresenter, E extends BaseMo
                         break;
 
                     case R.id.drawer_like:
-                        mClass = LikeActivity.class;
+                        if (SpUtil.getUser()==null){
+                            new MaterialDialog.Builder(mContext)
+                                    .title("提示")
+                                    .content("骚年 你还没有登录，确定登录？")
+                                    .negativeText("取消")
+                                    .positiveText("确定")
+                                    .onPositive((dialog, which) -> mClass= LoginActivity.class);
+                        }
+                        else
+                            mClass = LikeActivity.class;
                         break;
 
                     case R.id.drawer_setting:
