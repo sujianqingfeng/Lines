@@ -22,7 +22,7 @@
                 android:id="@+id/iv_item_like"
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
-                android:scaleType="fitXY"
+                android:scaleType="centerCrop"
                 android:src="@mipmap/ic_drawer_setting" />
 
                 <TextView
