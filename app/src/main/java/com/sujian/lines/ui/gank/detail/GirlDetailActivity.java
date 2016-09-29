@@ -66,7 +66,7 @@ public class GirlDetailActivity extends BaseActivity<GirlDetailPresenter,GirlDet
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.girl_menu,menu);
         menuItem = menu.findItem(R.id.action_like);
-
+        mPresenter.queryLikeData(id);
         return true;
     }
 
@@ -76,11 +76,11 @@ public class GirlDetailActivity extends BaseActivity<GirlDetailPresenter,GirlDet
         switch (id){
             case R.id.action_like:
                 if(isLiked) {
-                    item.setIcon(R.mipmap.ic_toolbar_like_n);
-
+                    //item.setIcon(R.mipmap.ic_toolbar_like_n);
+                    mPresenter.deleteLikeData();
                 } else {
-                    item.setIcon(R.mipmap.ic_toolbar_like_p);
-
+                    //item.setIcon(R.mipmap.ic_toolbar_like_p);
+                    mPresenter.insertLikeData(getIntent());
                 }
                 break;
             case R.id.action_save:

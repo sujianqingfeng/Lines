@@ -1,6 +1,7 @@
 package com.sujian.lines.ui.like;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +14,10 @@ import com.sujian.lines.R;
 import com.sujian.lines.base.util.ImageUtil;
 import com.sujian.lines.data.Data;
 import com.sujian.lines.data.entity.Like;
+import com.sujian.lines.ui.gank.detail.GirlDetailActivity;
+import com.sujian.lines.ui.gank.tech.TechPresenter;
+import com.sujian.lines.ui.wechat.detail.TechDetailActivity;
+import com.sujian.lines.ui.zhihu.detail.ZhihuDetailActivity;
 import com.yanzhenjie.recyclerview.swipe.SwipeMenuAdapter;
 
 import java.util.List;
@@ -30,11 +35,11 @@ public class LikeAdapter extends SwipeMenuAdapter<RecyclerView.ViewHolder> {
     private List<Like> restules;
     private LayoutInflater inflater;
     private OnItemClickListener onItemClickListener;
-    private Context context;
+    private Context mContext;
 
     public LikeAdapter(Context context, List<Like> restules) {
         this.restules = restules;
-        this.context=context;
+        this.mContext=context;
         inflater = LayoutInflater.from(context);
     }
 
@@ -71,34 +76,41 @@ public class LikeAdapter extends SwipeMenuAdapter<RecyclerView.ViewHolder> {
             viewHolder.tv_title.setText(like.getTitle());
             switch (like.getType()){
                 case C.TYPE_ZHIHU:
-                    ImageUtil.loadImg(context,viewHolder.imageView,like.getImage());
+                    ImageUtil.loadImg(mContext,viewHolder.imageView,like.getImage());
                     viewHolder.tv_source.setText("来自 知乎");
+                    viewHolder.itemView.setOnClickListener(v -> gotoDailyDetail(Integer.parseInt(like.getLid())));
                     break;
 
                 case C.TYPE_ANDROID:
                     viewHolder.tv_source.setText("来自 Android");
                     viewHolder.imageView.setBackgroundResource(R.mipmap.ic_android);
+                    viewHolder.itemView.setOnClickListener(v -> gotoTechDetail(like.getImage(),like.getTitle(),like.getLid(), TechPresenter.TECH_ANDROID));
                     break;
 
                 case C.TYPE_IOS:
                     viewHolder.imageView.setBackgroundResource(R.mipmap.ic_ios);
                     viewHolder.tv_source.setText("来自 IOS");
+                    viewHolder.itemView.setOnClickListener(v -> gotoTechDetail(like.getImage(),like.getTitle(),like.getLid(), TechPresenter.TECH_IOS));
                     break;
 
                 case C.TYPE_WEB:
                     viewHolder.imageView.setBackgroundResource(R.mipmap.ic_web);
                     viewHolder.tv_source.setText("来自 Web");
+                    viewHolder.itemView.setOnClickListener(v -> gotoTechDetail(like.getImage(),like.getTitle(),like.getLid(), TechPresenter.TECH_WEB));
                     break;
 
                 case C.TYPE_WECHAT:
-                    ImageUtil.loadImg(context,viewHolder.imageView,like.getLid());
+                    ImageUtil.loadImg(mContext,viewHolder.imageView,like.getLid());
                     viewHolder.tv_source.setText("来自 微信");
+                    viewHolder.itemView.setOnClickListener(v -> gotoTechDetail(like.getImage(),like.getTitle(),like.getLid(), TechPresenter.TECH_WEB));
                     break;
             }
         }else {
             GirlViewHolder viewHolder= (GirlViewHolder) holder;
-            ImageUtil.loadImg(context,viewHolder.imageView,like.getLid());
+            ImageUtil.loadImg(mContext,viewHolder.imageView,like.getImage());
             viewHolder.tv_source.setText("来自 Welfare");
+            viewHolder.itemView.setOnClickListener(v -> gotoGirlDetail(like.getImage(),like.getLid()));
+
         }
 
 
@@ -142,5 +154,31 @@ public class LikeAdapter extends SwipeMenuAdapter<RecyclerView.ViewHolder> {
 
     public interface OnItemClickListener {
         void onItemClick(int position, View view);
+    }
+
+
+    public void gotoDailyDetail(int id) {
+        Intent intent = new Intent();
+        intent.setClass(mContext, ZhihuDetailActivity.class);
+        intent.putExtra("id",id);
+        mContext.startActivity(intent);
+    }
+
+    public void gotoTechDetail(String url,String title,String id,String tech) {
+        Intent intent = new Intent();
+        intent.setClass(mContext, TechDetailActivity.class);
+        intent.putExtra("url",url);
+        intent.putExtra("title",title);
+        intent.putExtra("id",id);
+        intent.putExtra("tech",tech);
+        mContext.startActivity(intent);
+    }
+
+    public void gotoGirlDetail(String url,String id) {
+        Intent intent = new Intent();
+        intent.setClass(mContext, GirlDetailActivity.class);
+        intent.putExtra("url",url);
+        intent.putExtra("id",id);
+        mContext.startActivity(intent);
     }
 }

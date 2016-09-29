@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fitsSystemWindows="true"
     android:background="@color/colorBackground"
+    android:fitsSystemWindows="true"
     tools:context="com.sujian.lines.ui.like.LikeActivity">
 
     <android.support.design.widget.AppBarLayout
@@ -21,13 +21,19 @@
 
     </android.support.design.widget.AppBarLayout>
 
-    <com.yanzhenjie.recyclerview.swipe.SwipeMenuRecyclerView
-        android:id="@+id/rv_like"
-        android:paddingTop="8dp"
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/srl_like"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/colorBackground"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <com.yanzhenjie.recyclerview.swipe.SwipeMenuRecyclerView
+            android:id="@+id/rv_like"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/colorBackground"
+            android:paddingTop="8dp" />
+    </android.support.v4.widget.SwipeRefreshLayout>
 
 
 </android.support.design.widget.CoordinatorLayout>
