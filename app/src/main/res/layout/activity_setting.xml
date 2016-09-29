@@ -24,6 +24,7 @@
         <android.support.v4.widget.NestedScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:background="@color/colorBackground"
             app:layout_behavior="@string/appbar_scrolling_view_behavior">
             <LinearLayout
                 android:orientation="vertical"
@@ -36,6 +37,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="8dp"
+                    android:textColor="@color/colorText"
                     android:text="@string/setting_normal"/>
 
                 <android.support.v7.widget.CardView
@@ -43,6 +45,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     app:cardElevation="2dp"
+                    app:cardBackgroundColor="@color/colorCard"
                     app:cardCornerRadius="3dp"
                     android:background="#fff"
                     >
@@ -63,6 +66,7 @@
                             <TextView
                                 android:layout_width="0dp"
                                 android:layout_weight="1"
+                                android:textColor="@color/colorText"
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="12dp"
                                 android:text="@string/setting_cache"/>
@@ -89,6 +93,7 @@
                             <TextView
                                 android:layout_width="0dp"
                                 android:layout_weight="1"
+                                android:textColor="@color/colorText"
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="12dp"
                                 android:text="@string/setting_image"/>
@@ -113,6 +118,7 @@
                             <TextView
                                 android:layout_width="0dp"
                                 android:layout_weight="1"
+                                android:textColor="@color/colorText"
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="12dp"
                                 android:text="@string/setting_night"/>
@@ -130,6 +136,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="8dp"
+                    android:textColor="@color/colorText"
                     android:text="@string/setting_other"/>
 
                 <android.support.v7.widget.CardView
@@ -138,7 +145,7 @@
                     android:layout_height="wrap_content"
                     app:cardElevation="2dp"
                     app:cardCornerRadius="3dp"
-                    android:background="#fff">
+                    app:cardBackgroundColor="@color/colorCard">
                     <LinearLayout
                         android:orientation="vertical"
                         android:layout_width="match_parent"
@@ -158,6 +165,7 @@
                             <TextView
                                 android:layout_width="0dp"
                                 android:layout_weight="1"
+                                android:textColor="@color/colorText"
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="12dp"
                                 android:text="@string/setting_feedback"/>
@@ -178,12 +186,14 @@
                             <TextView
                                 android:layout_width="0dp"
                                 android:layout_weight="1"
+                                android:textColor="@color/colorText"
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="12dp"
                                 android:text="@string/setting_clear"/>
                             <TextView
                                 android:id="@+id/tv_setting_clear"
                                 android:text="缓存大小：200kb"
+                                android:textColor="@color/colorText"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content" />
                         </LinearLayout>
@@ -203,12 +213,14 @@
                             <TextView
                                 android:layout_width="0dp"
                                 android:layout_weight="1"
+                                android:textColor="@color/colorText"
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="12dp"
                                 android:text="@string/setting_update"/>
                             <TextView
                                 android:id="@+id/tv_setting_update"
                                 android:text="当前版本号：v1.0"
+                                android:textColor="@color/colorText"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content" />
                         </LinearLayout>
